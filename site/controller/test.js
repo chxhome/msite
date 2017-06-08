@@ -1,5 +1,6 @@
 ﻿var formidable = require("formidable");
 var handler = require("../../websvr/handler");
+var m_mycol = require('../model/mycol');
 exports.index = function (request, response, viewdata) {
     viewdata.title = "这是测试首页";
     return "/index";
@@ -7,6 +8,10 @@ exports.index = function (request, response, viewdata) {
 exports.about = function (request, response, viewdata) {
     viewdata.title = "这是测试关于页面";
     return "/about";
+};
+
+exports.vuetest = function (request, response, viewdata) {
+    return "/vuetest.html";
 };
 
 var fileDir = "../site/upfiles";
@@ -28,6 +33,22 @@ exports.getUser = function (request, response, viewdata) {
         code: 200, msg: '获取用户信息成功', data: { userId: 111, userName: "chx", realName: "陈焕许" }
     };
     handler.processAjax(response, data);
+};
+
+var MongoClient = require('mongodb').MongoClient;
+
+
+
+exports.getUserList = function (request, response, viewdata) {
+    var data = {
+        code: 200, msg: '获取用户信息成功', data: { userId: 111, userName: "chx", realName: "陈焕许" }
+    };
+   
+    m_mycol.findData(function (result) {
+        data.data = result;
+        handler.processAjax(response, data);
+    });
+   
 };
 
 exports.addUser = function (request, response, viewdata) {

@@ -6,29 +6,6 @@ myutil = require("./myutil");
 	var viewpathPrefix = config.docDir + "view/"
 	//基本头信息
 var commHeader = {"Server": "websvr1.0.1"};
-//内容类型
-exports.mime = {
-    "html": "text/html",
-    "css": "text/css",
-    "js": "application/x-javascript",
-    "json": "application/json",
-    "ico": "image/x-icon",
-    "gif": "image/gif",
-    "jpeg": "image/jpeg",
-    "jpg": "image/jpeg",
-    "png": "image/png",
-    "pdf": "application/pdf",
-    "svg": "image/svg+xml",
-    "swf": "application/x-shockwave-flash",
-    "tiff": "image/tiff",
-    "txt": "text/plain",
-    "wav": "audio/x-wav",
-    "wma": "audio/x-ms-wma",
-    "wmv": "video/x-ms-wmv",
-    "xml": "text/xml",
-    ajax: "application/json"
-};
-var staticSrcTypes = {"jpg": 1, "jpeg": 1, "png": 1, "gif": 1, "ico": 1, "css": 1, "js": 1};
 
 var getController = function (router) {
     var controllerPath = config.docDir + "controller/" + router["controller"];
@@ -46,7 +23,7 @@ exports.process = function (router, request, response) {
     var pathname = router.pathname;
     var exdName = pathname.substring(pathname.lastIndexOf(".") + 1);
     //静态资源统一处理
-    if (config.staticDir[router.controller] || staticSrcTypes[exdName]) {
+    if (config.staticDir[router.controller] || config.staticSrcTypes[exdName]) {
         this.processStatic(router, request, response);
         return;
     }
@@ -63,7 +40,7 @@ exports.processStatic = function (router, __request, __response) {
         var exdName = pathname.substring(pathname.lastIndexOf(".") + 1);
         console.log(exdName);
         var resHeader = myutil.extend({
-            "Content-Type": exports.mime[exdName]//根据扩展名，设置header的输出文件类型
+            "Content-Type": config.mime[exdName]//根据扩展名，设置header的输出文件类型
         }, commHeader);
         __response.writeHead(200, resHeader);
         __response.end(data);
@@ -91,6 +68,7 @@ exports.processPage = function (router, __request, __response) {
     }
     var _viewPath = actionFn(__request, __response, viewdata);
     if (!_viewPath) {
+       // __response.end();
         return;//未指定视图文件，有可能是异步请求
     }
     //当用户在action方法里直接返回带.html扩展名的文件时，不作为freemarker模板文件解析
@@ -104,9 +82,9 @@ exports.processPage = function (router, __request, __response) {
             __response.end(data);
         });
     } else {
-        // 以下代码可以支持 freemarker视图文件，扩展名为config.conf.exdName
+        // 以下代码可以支持 freemarker视图文件，扩展名为config.viewExdName
         var _viewRootPrefix = viewpathPrefix + router.controller;
-        var viewFilePath = _viewRootPrefix + _viewPath + "." + config.exdName;
+        var viewFilePath = _viewRootPrefix + _viewPath + "." + config.viewExdName;
         fs.exists(viewFilePath, function (exists) {
             if (exists) {
                 var fm = new Freemarker({
@@ -115,8 +93,8 @@ exports.processPage = function (router, __request, __response) {
                         /** for fmpp */
                     }
                 });
-                console.log(_viewPath + "." + config.exdName);
-                fm.render(_viewPath + "." + config.exdName, viewdata, function (err, html, output) {
+                console.log(_viewPath + "." + config.viewExdName);
+                fm.render(_viewPath + "." + config.viewExdName, viewdata, function (err, html, output) {
                     if (!err) {
                         var resHeader = myutil.extend({
                             "Content-Type": "text/html;charset=utf-8"
@@ -139,7 +117,7 @@ exports.processPage = function (router, __request, __response) {
 //处理AJAX数据
 exports.processAjax = function (__response,data) {
     var resHeader = myutil.extend({
-        "Content-Type": exports.mime["ajax"]
+        "Content-Type": exports.config["ajax"]
     }, commHeader);
     __response.writeHead(200, resHeader);
     __response.write(JSON.stringify(data));

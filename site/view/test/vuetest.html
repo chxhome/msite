@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <style>
+        #app{visibility:hidden;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{title}}</h1>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>name</td><td>age</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in list">
+                        <td>{{item.name}}</td>
+                        <td>{{item.age}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
+
+    <script>
+        var api = {
+            getUserList: "/test/getUserList"
+        };
+        var app = new Vue({
+            el: '#app',
+            data: {
+                title: 'nodejs nodewebsvr mongodb vue测试页面',
+                list:[]
+            },
+            created: function () {
+                var _this = this;
+                $.ajax({
+                    url: api.getUserList,
+                    success: function (data) {
+                        console.log(data);
+                        this._data.list = data.data;
+                    }.bind(this)
+                    , error: function () {
+
+                    }
+                });
+            },
+            updated: function () {
+                this.$el.style.visibility = "visible";
+            }
+        });
+    </script>
+</body>
+</html>
