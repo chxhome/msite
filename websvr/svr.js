@@ -2,7 +2,10 @@
  router = require("./router");
 exports.start = function (port) {
     http.createServer(function (request, response) {
-       router.route(request, response);
+    	//console.log(__dirname);
+    	//var rrr=require("/root/git/msite/site/controller/test");
+    	//console.log(rrr);
+        router.route(request, response);
 
     }).listen(port);
     

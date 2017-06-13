@@ -13,7 +13,7 @@ var getController = function (router) {
         return require(controllerPath);
     }
     catch(e){
-        console.log(">>>获取控制器失败：" + controllerPath);
+        console.log(">>>获取控制器失败：" + controllerPath+e.message);
     }
     return null;
 };
@@ -38,7 +38,7 @@ exports.processStatic = function (router, __request, __response) {
     console.log("静态文件路径：" + filePath);
     fs.readFile(filePath,function(err, data) {
         var exdName = pathname.substring(pathname.lastIndexOf(".") + 1);
-        console.log(exdName);
+        //console.log(exdName);
         var resHeader = myutil.extend({
             "Content-Type": config.mime[exdName]//根据扩展名，设置header的输出文件类型
         }, commHeader);
@@ -61,6 +61,7 @@ exports.processPage = function (router, __request, __response) {
     }
     var viewdata = myutil.extend({}, { params: router.params });
     var action = router["action"] || router["controller"];//如果没有ACTION，controller作为action名，这样可以实现根目录页面访问地址。
+
     var actionFn = controller[action];
     if (typeof actionFn !== "function") {
         this.responseErr(404, "获取页面失败", __request, __response);
@@ -74,10 +75,12 @@ exports.processPage = function (router, __request, __response) {
     //当用户在action方法里直接返回带.html扩展名的文件时，不作为freemarker模板文件解析
     if (_viewPath.indexOf(".html") > 1) {
         var viewRealPath = viewpathPrefix + router.controller + _viewPath;
+        console.log(">>>---"+viewRealPath);
         fs.readFile(viewRealPath, function(err, data) {
             var resHeader = myutil.extend({
                 "Content-Type": "text/html charset=UTF-8"
             }, commHeader);
+            console.log(resHeader);
             __response.writeHead(200, resHeader);
             __response.end(data);
         });
@@ -85,7 +88,9 @@ exports.processPage = function (router, __request, __response) {
         // 以下代码可以支持 freemarker视图文件，扩展名为config.viewExdName
         var _viewRootPrefix = viewpathPrefix + router.controller;
         var viewFilePath = _viewRootPrefix + _viewPath + "." + config.viewExdName;
+        console.log(">>>"+viewFilePath);
         fs.exists(viewFilePath, function (exists) {
+            console.log("---"+exists);
             if (exists) {
                 var fm = new Freemarker({
                     viewRoot: _viewRootPrefix,
@@ -93,8 +98,9 @@ exports.processPage = function (router, __request, __response) {
                         /** for fmpp */
                     }
                 });
-                console.log(_viewPath + "." + config.viewExdName);
+                //console.log(_viewPath + "." + config.viewExdName);
                 fm.render(_viewPath + "." + config.viewExdName, viewdata, function (err, html, output) {
+                    console.log(err);
                     if (!err) {
                         var resHeader = myutil.extend({
                             "Content-Type": "text/html;charset=utf-8"

@@ -4,4 +4,4 @@
 //config.port=1005;
 
 var srv = require("./svr");
-srv.start(1005);
+srv.start(80);

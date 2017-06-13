@@ -28,7 +28,7 @@ var extendResponse = function (response) {
 exports.route = function (request, response) {
     extendResponse(response);
 
-    console.log(util.inspect(response));
+    //console.log(util.inspect(response));
     var _urlObj = url.parse(request.url);
     var _pathArr = [];
     var _router = { controller: "home", action: "index", "pathname": _urlObj.pathname };
@@ -40,6 +40,9 @@ exports.route = function (request, response) {
         _router.controller = _pathArr[0];
         if (_pathArr.length > 1) {
             _router.action = _pathArr[1];
+            if (_router.action.indexOf(".") > 1) {
+                _router.action=_router.action.substring(0,_router.action.indexOf("."));
+            }
         }
         if (_pathArr.length > 2) {
             //第三个元素开始是参数
