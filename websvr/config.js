@@ -1,6 +1,7 @@
 ﻿module.exports = {
     //网站所在的磁盘目录
-    docDir: "/root/git/msite/site/",
+    //docDir: "/root/git/msite/site/",
+    docDir:"E:/home/TestCodes/msite/site/",
     //网站默认的路由规则
     router: {
         "url": "{controller}/{action}/{id}/{page}",
