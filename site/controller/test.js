@@ -32,7 +32,7 @@ exports.getUser = function (request, response, viewdata) {
     var data = {
         code: 200, msg: '获取用户信息成功', data: { userId: 111, userName: "chx", realName: "陈焕许" }
     };
-    handler.processAjax(response, data);
+    handler.processAjax(request,response, data);
 };
 
 var MongoClient = require('mongodb').MongoClient;
@@ -43,11 +43,15 @@ exports.getUserList = function (request, response, viewdata) {
     var data = {
         code: 200, msg: '获取用户信息成功', data: { userId: 111, userName: "chx", realName: "陈焕许" }
     };
-   
-    m_mycol.findData(function (result) {
+   try{
+   	 m_mycol.findData(function (result) {
         data.data = result;
-        handler.processAjax(response, data);
+        handler.processAjax(request,response, data);
     });
+   
+   }catch(e){
+   	 handler.responseErr(500, e.message, request, response);
+   }
    
 };
 
@@ -65,7 +69,7 @@ exports.addUser = function (request, response, viewdata) {
         for (var k in params) {
             data.data[k.toString()] = params[k.toString()];
         }
-        handler.processAjax(response, data);
+        handler.processAjax(request,response, data);
 
     });
 };
