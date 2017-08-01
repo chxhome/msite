@@ -1,0 +1,40 @@
+@import './base/_config.mcss';
+@import './base/_prefix.mcss';
+@import './base/_base.mcss';
+@import './base/_func.mcss';
+html,body{height:100%;}
+.g-body{height:100%;}
+.g-blog {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    .g-left {
+        width: 180px;
+        border-right: $solid;
+        padding: 10px;
+    }
+
+    .g-right {
+        flex: 1;
+        padding: 10px;
+    }
+}
+
+.m-nav {
+
+
+    li {
+        height: 30px;
+        line-height: 30px;
+
+        a {
+            display: block;
+            padding-left: 50px;
+        }
+
+        a:hover {
+            background: #009;
+            color: #fff;
+        }
+    }
+}

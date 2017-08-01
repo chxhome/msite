@@ -1,0 +1,46 @@
+﻿{
+  "rules": {
+    "rewrite": {
+      "404": "/m/blog/list/",
+      "/m/blog/list/": "/m/blog/"
+    },
+    "title": {
+      "/m/": "博客",
+      "/m/blog/": "博客日志",
+      "/m/blog/tags/": "博客系统 - 标签",
+      "/m/blog/detail/": "博客系统 - 详情",
+      "/m/setting/account/": "博客设置 - 账号",
+      "/m/setting/permission/": "博客设置 - 权限"
+    },
+    "alias": {
+      "blog-sys": "/m/",
+      "blog-index": "/m/blog/",
+      "blog-list": "/m/blog/list/",
+      "blog-index-list": "/?/m/blog/list/",
+      "blog-index-nav": "/?/m/blog/nav/",
+      "blog-tags": "/m/blog/tags/",
+      "blog-detail": "/m/blog/detail/",
+      "setting-account": "/m/setting/account/",
+      "setting-permission": "/m/setting/permission/"
+
+    }
+  },
+  "modules": {
+    "/m/": "blogsys/index.html",
+    "/m/blog/":  "blogsys/index.html",//"blogsys/index.html","blogsys/index.html","blogsys/blog/index.html",
+    "/m/blog/list": "blogsys/blog/list/list.html",
+    //"/m/list/": {
+    //  "module": "blog/list/list.html",
+    //  "composite": {
+    //    "nav": "/?/m/blog/nav/",
+    //    "list": "/?/m/blog/list/"
+    //  }
+    //},
+    "/m/blog/detail/": "blogsys/blog/detail/detail.html",
+    "/m/blog/tags/": "blogsys/blog/tags/tags.html",
+    "/m/setting/account/": "blogsys/setting/account/index.html",
+    "/m/setting/permission/": "blogsys/setting/permission/index.html",
+    "/?/m/blog/nav/": "blogsys/blog/index/nav/index.html",
+    "/?/m/blog/list/": "blogsys/blog/index/list/index.html"
+  }
+}

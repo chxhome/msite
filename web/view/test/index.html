@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>${title}</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <h1>${title}</h1>
+    <fieldset>
+        <legend>同步上传文件</legend>
+        <form action="/test/upload" method="post" enctype="multipart/form-data">
+            <div> <input type="text" name="title" /></div>
+            <div> <input type="file" name="file" multiple="multiple" /></div>
+            <div><textarea name="about" cols="40" rows="5"></textarea></div>
+            <div> <button type="submit">提交</button></div>
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>异步提交</legend>
+        <form action="/test/upload" method="post" enctype="multipart/form-data" id="form1">
+            <div> <input type="text" id="title" name="title" /></div>
+            <div> <input type="file" id="file" name="file" multiple="multiple" /></div>
+            <div><textarea id="about" name="about" cols="40" rows="5"></textarea></div>
+        </form>
+        <div> <button type="button" id="btn">上传文件</button></div>
+        <div> <button type="button" id="btn2">上传表单</button></div>
+        <h3 id="note"></h3>
+    </fieldset>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+            crossorigin="anonymous"></script>
+    <script>
+
+        $("#btn").click(function (ev) {
+            var formData = new FormData($("#form1")[0]);
+            var oOutput = $("#note")[0];
+            var oReq = new XMLHttpRequest();
+            oReq.open("POST", "/test/upload", true);
+            oReq.onload = function (oEvent) {
+                if (oReq.status == 200) {
+                    oOutput.innerHTML = "Uploaded!";
+                } else {
+                    oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
+                }
+            };
+            oReq.send(formData);
+            ev.preventDefault();
+        });
+
+        $("#btn2").click(function (ev) {
+            var formData = new FormData($("#form1")[0]);
+            var oOutput = $("#note")[0];
+            var oReq = new XMLHttpRequest();
+            oReq.open("POST", "/test/addUser", true);
+            oReq.onload = function (oEvent,a,b) {
+                console.log(oEvent); console.log(a); console.log(b);
+                if (oReq.status == 200) {
+                    oOutput.innerHTML = "Uploaded!";
+                } else {
+                    oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
+                }
+            };
+            oReq.send(formData);
+            ev.preventDefault();
+        });
+    </script>
+</body>
+</html>

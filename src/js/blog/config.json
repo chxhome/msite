@@ -1,0 +1,24 @@
+﻿{
+
+  "modules": {
+    "/m": "blogsys/index.html",
+    "/m/blog": "blogsys/blog/index.html",
+    "/m/blog/": "blogsys/blog/list/list.html",
+    "/m/blog/list": "blogsys/blog/list/list.html"
+  },
+  "rules": {
+    "rewrite": {
+      "404": "/m/blog/list",
+      "/m/blog/list": "/m"
+    },
+    "title": {
+      "/m": "博客"
+    },
+    "alias": {
+      "blog-sys": "/m",
+      "blog-index": "/m/blog",
+      "blog-blog": "/m/blog/",
+      "blog-list": "/m/blog/list"
+    }
+  }
+}
