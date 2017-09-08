@@ -8,7 +8,7 @@ NEJ.define([
     'base/event',
     'base/element',
     'util/template/tpl',
-    'pro/blog/module'
+    'pro/module'
 ], function (k, v, e, tpl, t, p, pro, Module) {
     /**
      * 当前会话布局模块
@@ -19,6 +19,32 @@ NEJ.define([
      */
     Module = k._$klass();
     pro = Module._$extend(t._$$Module);
+
+    pro.onTabClick = function (_event) {
+        var nList = v._$getElement(_event, 'c:bloglist'),
+            nTags = v._$getElement(_event, 'c:blogtags');
+        for (var a = 0; a < this.nTabs.childNodes.length; a++) {
+            if (this.nTabs.childNodes[a].nodeType === 1) {
+                e._$delClassName(this.nTabs.childNodes[a], 'z-crt');
+            }
+            
+        }
+        if (nList) {
+            e._$addClassName(nList, 'z-crt');
+            if (window.location.hash.indexOf("/m/blog/list/" == -1)) {
+                return;//window.dispatcher._$redirect("/m/blog/list/");
+            }
+            
+        }
+
+        if (nTags) {
+            e._$addClassName(nTags, 'z-crt');
+            if (window.location.hash.indexOf("/m/blog/tags/" == -1)) {
+                return;//window.dispatcher._$redirect("/m/blog/tags/");
+            }
+            
+        }
+    };
     /**
      * 构建模块
      * @return {Void}
@@ -32,6 +58,15 @@ NEJ.define([
         this.__export = {
             parent: _nodes[0]
         };
+        this.nTabs = e._$getByClassName(this.__body, 'm-tab')[0]; 
+        v._$addEvent(this.nTabs, 'click', this.onTabClick._$bind(this));
+        if (window.location.hash.indexOf("/m/blog/tags/") >= 0) {
+            console.log(this.nTabs);
+            var nlis = e._$getChildren(this.nTabs);
+            e._$delClassName(nlis[0], 'z-crt');
+            e._$addClassName(nlis[1], 'z-crt');
+        }
+
     };
     /**
      * 模块显示

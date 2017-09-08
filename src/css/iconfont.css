@@ -1,0 +1,14 @@
+@font-face {font-family:"iconfont";src:url("/res/fonts/iconfont/iconfont.eot?v=1504493028827");src:url("/res/fonts/iconfont/iconfont.eot?v=1504493028827#iefix") format("eot"),url("/res/fonts/iconfont/iconfont.woff2?v=1504493028827") format("woff2"),url("/res/fonts/iconfont/iconfont.woff?v=1504493028827") format("woff"),url("/res/fonts/iconfont/iconfont.ttf?v=1504493028827") format("truetype"),url("/res/fonts/iconfont/iconfont.svg?v=1504493028827#iconfont") format("svg");}
+.u-icon{display:inline-block;font-family:"iconfont" !important;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-style:normal;font-weight:normal;font-variant:normal;text-transform:none;line-height:1;font-size:16px;vertical-align:middle;text-decoration:none;text-transform:none;}
+.u-icon-android:before{content:"\E001";}
+.u-icon-close:before{content:"\E002";}
+.u-icon-download:before{content:"\E003";}
+.u-icon-ios:before{content:"\E004";}
+.u-icon-mac:before{content:"\E005";}
+.u-icon-phone:before{content:"\E006";}
+.u-icon-web-hover:before{content:"\E007";}
+.u-icon-web:before{content:"\E008";}
+.u-icon-wechat:before{content:"\E009";}
+.u-icon-weibo:before{content:"\E00A";}
+.u-icon-windows:before{content:"\E00B";}
+.u-icon-yixin:before{content:"\E00C";}

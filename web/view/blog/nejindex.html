@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>NEJ模板调度测试-博客系统</title>
+    <link href="/src/css/nejblog.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="blog-module" class="g-module"></div>
+    <!--<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>-->
+    <script src="../res/nej/define.js?pro=/src/js/"></script>
+    <script>
+        location.config = { root: '/src/html/' };
+        NEJ.define([
+            'lib/util/template/tpl',
+            'lib/util/dispatcher/dispatcher',
+            'json!pro/blog/config.json'
+        ], function (tpl, dispatcher, config) {
+
+            dispatcher._$startup(config);
+
+       });
+
+        //$.ajax({
+        //    url: "/nejblog/getTagList",
+        //    success: function (data) {
+        //        console.log(data);
+        //        //this._data.list = data.data;
+        //    }.bind(this)
+        //    , error: function () {
+
+        //    }
+        //});
+    </script>
+</body>
+</html>

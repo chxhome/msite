@@ -9,5 +9,48 @@
 <body>
     <h1>${title}</h1>
     <div><img src='/upfiles/test.jpg' width="400" /></div>
+
+    <div class="m-form">
+        <div>
+            <label><input type="radio" name="deviceType" id="deviceType1" checked />终端设备</label>
+            <span>
+                <select id="selDevice1">
+                    <option value="">请选择</option>
+                    <option value="设备1">设备1</option>
+                    <option value="设备2">设备2</option>
+                </select>
+            </span>
+        </div>
+        <div>
+            <label><input type="radio" name="deviceType" id="deviceType2" />IT关键产品</label>
+            <span>
+                <select id="selDevice2" disabled>
+                    <option value="">请选择</option>
+                    <option value="产品1">产品1</option>
+                    <option value="产品2">产品2</option>
+                </select>
+            </span>
+        </div>
+    </div>
+    <script>
+
+        (function () {
+            var nDeviceType1 = document.getElementById("deviceType1");
+            var nDeviceType2 = document.getElementById("deviceType2");
+            var nSelDevice1 = document.getElementById("selDevice1");
+            var nSelDevice2 = document.getElementById("selDevice2");
+
+            nDeviceType1.addEventListener("click", function (e) {
+                nSelDevice1.disabled = false;
+                nSelDevice2.disabled = true;
+            }, false);
+
+            nDeviceType2.addEventListener("click", function (e) {
+                nSelDevice1.disabled = true;
+                nSelDevice2.disabled = false;
+            }, false);
+        })();
+
+    </script>
 </body>
 </html>

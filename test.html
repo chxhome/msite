@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+.m-table{table-layout:fixed;width:100%;font-size:14px !important;line-height:44px;color:#222;font-weight:400;text-align:left;border:0;}
+.m-table caption{height:44px;overflow:hidden;border-bottom:1px solid #f0f1f2;background-color:#fff;text-align:center;}
+.m-table tr{height:44px;overflow:hidden;background-color:#fff !important;}
+.m-table tr .u-icon-edit{margin-right:20px;}
+.m-table thead tr{border-bottom:1px solid #c5c6c7;}
+.m-table tbody tr{border-bottom:1px solid #f0f1f2;}
+.m-table th,.m-table td{padding-left:10px;  overflow: hidden;
+    word-wrap: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;}
+.m-table th{font-weight:700;font-size:14px;color:#222;background:#aaa;}
+.m-table th .sort{display:inline-block;height:15px;padding:2px 0 0 4px;vertical-align:middle;width:8px;}
+.m-table th .u-icon-triangleup,.m-table th .u-icon-triangledown{display:block;}
+.m-table th .u-icon-triangleup{margin-bottom:2px;}
+.m-table th .z-triangleup-active,.m-table th .z-triangledown-active{background-position-x:-60px !important;}
+.m-table td{font-size:14px;background:#eee;}
+.m-table td a{cursor:default;}
+.m-table td .u-icon-edit{margin-right:20px;}
+.m-table td .u-icon-admin,.m-table td .u-icon-superadmin,.m-table td .u-icon-kefu,.m-table td .u-icon-outerkefu,.m-table td .u-icon-empty{margin-right:4px;}
+.m-table td .u-icon-online,.m-table td .u-icon-offline,.m-table td .u-icon-kefupending{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;}
+.m-table td .u-icon-kefu{background:transparent;}
+.m-table td .u-icon-disabled{transform:translate(-1px,2px);}
+.m-table td .u-icon-okmini{transform:translate(-2px,4px);}
+.m-table td .u-icon-empty{display:inline-block;width:14px;height:14px;}
+.m-table td .m-tips{display:inline-block;}
+.m-table td .time{display:inline-block;min-width:48px;}
+.m-table td .u-icon-usergroup{transform:translateY(4px);margin-right:4px;}
+.m-table td .delete{cursor:pointer;}
+
+        .session_list_sbox { height:300px;overflow:auto;}
+    </style>
+</head>
+<body>
+    <div class="session_list">
+        <div class="m-table-head j-tbflag" id="auto-id-1502439127102">
+            <table class="m-table m-table-session">
+                <thead class="j-thflag j-header">    
+                <tr>
+                    <th class="f-cp arrow" data-action="order" data-sort-by="it">用户进线时间<div class="sort"><i class="u-icon-triangleup"></i><i class="u-icon-triangledown"></i></div></th>
+                    <th>接待客服</th>    
+                    <th>用户名</th>  
+                    <th class="f-cp arrow desc" data-action="order" data-sort-by="st">会话开始时间<div class="sort"><i class="u-icon-triangleup"></i><i class="u-icon-triangledown"></i></div></th>
+                    <!--<th class="f-dn">访客首条消息时间</th>
+                    <th class="f-dn">首次回复时间</th> 
+                    <th class="f-cp arrow f-dn" data-action="order" data-sort-by="et">会话结束时间<div class="sort"><i class="u-icon-triangleup"></i><i class="u-icon-triangledown"></i></div></th>
+                    <th class="f-cp arrow f-dn" data-action="order" data-sort-by="fd">客服首次响应时长<div class="sort"><i class="u-icon-triangleup"></i><i class="u-icon-triangledown"></i></div></th> 
+                    <th class="f-cp arrow f-dn" data-action="order" data-sort-by="wt">访客排队时长<div class="sort"><i class="u-icon-triangleup"></i><i class="u-icon-triangledown"></i></div></th>--> 
+                    <th class="f-cp arrow" data-action="order" data-sort-by="ct">会话时长<div class="sort"><i class="u-icon-triangleup"></i><i class="u-icon-triangledown"></i></div></th>  
+                    <th>咨询分类</th>  
+                    <th>会话发起方</th> 
+                    <th>会话终止方</th>   
+                    <th class="f-cp arrow" data-action="order" data-sort-by="vt">重复咨询<div class="sort"><i class="u-icon-triangleup"></i><i class="u-icon-triangledown"></i></div></th>  
+                    <th>来源终端</th>      
+                    <th class="media-hide">用户IP地址</th>   
+                    <th>来源页面</th>      
+                    <th>状态</th>      
+                    <th>满意度</th>         
+                    <th>报警次数</th> 
+                 </tr>
+                </thead>
+            </table>
+            <div class="m-column-config">
+                <i class="u-icon-font icon-gear"></i>
+            </div>
+        </div>
+        <div class="session_list_sbox j-tbflag" id="auto-id-1502439127103">
+            <table class="m-table m-table-session">
+                <tbody class="j-flag" id="auto-id-1502439127106"> 
+                <tr class="j-item " data-id="12114495" data-foreignid="vv2xxmq7hzsukedzqvhf" data-sid="5563619" id="hist-121144951502439126982">       
+                    <!-- 用户进线时间 -->                   
+                    <td>昨天 16:21</td>   
+                    <!-- 接待客服 -->                                            
+                    <!-- 非机器人 -->                
+                    <td>guanliyuan22</td>                                      
+                    <!-- 用户名显示 -->                               
+                    <td class="">              <h5 class="f-toe">Guest5563619</h5>                            </td>            
+                    <!-- 会话开始时间 -->    
+                    <td>昨天 16:21</td>                    
+                    <!-- 访客首条消息时间 -->             
+                    <!-- 首次回复时间 -->                
+                    <!-- 会话结束时间 -->              
+                    <!-- 客服首次响应时长 -->           
+                    <!-- 访客排队时长 -->             
+                    <!-- 会话时长 -->               
+                    <td>13秒</td>                   
+                    <!-- 机器人/非机器人 -->                       
+                    <td class="z-tip">              <h5>未分类</h5>              <div class="m-tooltip m-tooltip-detail m-tooltip-session">                <a class="iconTip"><i class="u-icon-help"></i></a>                <div class="inner inner-left">                    未分类                    <!--<div class="text"></div>-->                </div>              </div>        </td>     
+                    <!-- 会话发起方 -->              
+                    <td>用户</td>           
+                    <!-- 会话终止方 -->            
+                    <td>客服</td>                      
+                    <td>3</td>               
+                    <!-- 来源终端 -->                  
+                    <td>            <!-- 此处的终端提示统一改为系统默认tip -->                          <i class="u-icon u-icon-pc" title="Windows 7-Chrome 60.0.3112.90"></i>                      </td> 
+                    <!-- 用户ip地址 -->                  
+                    <td class="media-hide">浙江&nbsp;杭州</td>           
+                    <!-- 来源页面 -->                   
+                    <td>云商服WEB&nbsp;SDK使用DEMO</td>                
+                    <!-- 状态 -->              
+                    <td class="">已解决</td>                  
+                    <!-- 满意度 -->                     
+                    <td class="z-tip">              <h5>未评价</h5>                          </td>                             
+                    <!-- 报警次数 -->                       
+                    <td>0</td>                                      
+                   </tr>              
+                <tr class="j-item " data-id="12114329" data-foreignid="vv2xxmq7hzsukedzqvhf" data-sid="5563619" id="hist-121143291502439126982">          <!-- 用户进线时间 -->                    <td>昨天 14:30</td>                  <!-- 接待客服 -->                                                  <!-- 非机器人 -->                  <td>aggie</td>                                              <!-- 用户名显示 -->                                <td class="">              <h5 class="f-toe">Guest5563619</h5>                            </td>                  <!-- 会话开始时间 -->                    <td>昨天 14:30</td>                          <!-- 访客首条消息时间 -->                  <!-- 首次回复时间 -->                  <!-- 会话结束时间 -->                  <!-- 客服首次响应时长 -->                  <!-- 访客排队时长 -->                <!-- 会话时长 -->                <td>1分1秒</td>                    <!-- 机器人/非机器人 -->                        <td class="z-tip">              <h5>未分类</h5>              <div class="m-tooltip m-tooltip-detail m-tooltip-session">                <a class="iconTip"><i class="u-icon-help"></i></a>                <div class="inner inner-left">                    未分类                    <!--<div class="text"></div>-->                </div>              </div>        </td>                    <!-- 会话发起方 -->                <td>用户</td>            <!-- 会话终止方 -->                <td>客服</td>                        <td>2</td>                    <!-- 来源终端 -->                    <td>            <!-- 此处的终端提示统一改为系统默认tip -->                          <i class="u-icon u-icon-pc" title="Windows 7-Chrome 60.0.3112.90"></i>                      </td>              <!-- 用户ip地址 -->                    <td class="media-hide">浙江&nbsp;杭州</td>              <!-- 来源页面 -->                    <td>云商服WEB&nbsp;SDK使用DEMO</td>                      <!-- 状态 -->                <td class="">已解决</td>                    <!-- 满意度 -->                        <td class="z-tip">              <h5>未评价</h5>                          </td>                                <!-- 报警次数 -->                        <td>0</td>                                        </tr>                <tr class="j-item " data-id="12114325" data-foreignid="vv2xxmq7hzsukedzqvhf" data-sid="5563619" id="hist-121143251502439126982">          <!-- 用户进线时间 -->                    <td>昨天 14:29</td>                  <!-- 接待客服 -->                                                  <!-- 非机器人 -->                  <td>guanliyuan22</td>                                              <!-- 用户名显示 -->                                <td class="">              <h5 class="f-toe">Guest5563619</h5>                            </td>                  <!-- 会话开始时间 -->                    <td>昨天 14:29</td>                          <!-- 访客首条消息时间 -->                  <!-- 首次回复时间 -->                  <!-- 会话结束时间 -->                  <!-- 客服首次响应时长 -->                  <!-- 访客排队时长 -->                <!-- 会话时长 -->                <td>24秒</td>                    <!-- 机器人/非机器人 -->                        <td class="z-tip">              <h5>未分类</h5>              <div class="m-tooltip m-tooltip-detail m-tooltip-session">                <a class="iconTip"><i class="u-icon-help"></i></a>                <div class="inner inner-left">                    未分类                    <!--<div class="text"></div>-->                </div>              </div>        </td>                    <!-- 会话发起方 -->                <td>用户</td>            <!-- 会话终止方 -->                <td>客服</td>                        <td>1</td>                    <!-- 来源终端 -->                    <td>            <!-- 此处的终端提示统一改为系统默认tip -->                          <i class="u-icon u-icon-pc" title="Windows 7-Chrome 60.0.3112.90"></i>                      </td>              <!-- 用户ip地址 -->                    <td class="media-hide">浙江&nbsp;杭州</td>              <!-- 来源页面 -->                    <td>云商服WEB&nbsp;SDK使用DEMO</td>                      <!-- 状态 -->                <td class="">已解决</td>                    <!-- 满意度 -->                        <td class="z-tip">              <h5>未评价</h5>                          </td>                                <!-- 报警次数 -->                        <td>0</td>                                        </tr>                <tr class="j-item " data-id="12114323" data-foreignid="vv2xxmq7hzsukedzqvhf" data-sid="5563619" id="hist-121143231502439126982">          <!-- 用户进线时间 -->                    <td>昨天 14:28</td>                  <!-- 接待客服 -->                                                  <!-- 非机器人 -->                  <td>guanliyuan22</td>                                              <!-- 用户名显示 -->                                <td class="">              <h5 class="f-toe">Guest5563619</h5>                            </td>                  <!-- 会话开始时间 -->                    <td>昨天 14:28</td>                          <!-- 访客首条消息时间 -->                  <!-- 首次回复时间 -->                  <!-- 会话结束时间 -->                  <!-- 客服首次响应时长 -->                  <!-- 访客排队时长 -->                <!-- 会话时长 -->                <td>9秒</td>                    <!-- 机器人/非机器人 -->                        <td class="z-tip">              <h5>未分类</h5>              <div class="m-tooltip m-tooltip-detail m-tooltip-session">                <a class="iconTip"><i class="u-icon-help"></i></a>                <div class="inner inner-left">                    未分类                    <!--<div class="text"></div>-->                </div>              </div>        </td>                    <!-- 会话发起方 -->                <td>用户</td>            <!-- 会话终止方 -->                <td>客服</td>                        <td></td>                    <!-- 来源终端 -->                    <td>            <!-- 此处的终端提示统一改为系统默认tip -->                          <i class="u-icon u-icon-pc" title="Windows 7-Chrome 60.0.3112.90"></i>                      </td>              <!-- 用户ip地址 -->                    <td class="media-hide">浙江&nbsp;杭州</td>              <!-- 来源页面 -->                    <td>云商服WEB&nbsp;SDK使用DEMO</td>                      <!-- 状态 -->                <td class="">已解决</td>                    <!-- 满意度 -->                        <td class="z-tip">              <h5>未评价</h5>                          </td>                                <!-- 报警次数 -->                        <td>0</td>                                        </tr>    </tbody>
+            </table>
+            <div class="m-page j-flag auto-1502439126996-parent">
+                <div class="page_info">
+                    当前页<span class="j-pflag">1</span>-<span class="j-pflag">4</span>条, 共<span class="j-pflag">4</span>条
+                </div>
+                <div class="auto-1502439126996 m-page-nej" id="auto-id-1502439127182" data-log="ad-hs-pc"><a href="#" class="zbtn zprv z-dis" id="auto-id-1502439127185">&lt;</a><a href="#" class="zpgi zpg1 z-crt" id="auto-id-1502439127191">1</a><a href="#" class="zpgi zpg2" id="auto-id-1502439127193" style="display: none;"></a><a href="#" class="zpgi zpg3" id="auto-id-1502439127195" style="display: none;"></a><a href="#" class="zpgi zpg4" id="auto-id-1502439127197" style="display: none;"></a><a href="#" class="zpgi zpg5" id="auto-id-1502439127199" style="display: none;"></a><a href="#" class="zpgi zpg6" id="auto-id-1502439127201" style="display: none;"></a><a href="#" class="zpgi zpg7" id="auto-id-1502439127203" style="display: none;"></a><a href="#" class="zbtn znxt z-dis" id="auto-id-1502439127187">&gt;</a></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 ﻿var formidable = require("formidable");
 var handler = require("../nsvr/handler");
-var m_mycol = require('../model/mycol');
+//var m_mycol = require('../model/mycol');
 exports.index = function (request, response, viewdata) {
     viewdata.title = "这是测试首页";
     return "/index";
@@ -44,10 +44,10 @@ exports.getUserList = function (request, response, viewdata) {
         code: 200, msg: '获取用户信息成功', data: { userId: 111, userName: "chx", realName: "陈焕许" }
     };
    try{
-   	 m_mycol.findData(function (result) {
-        data.data = result;
-        handler.processAjax(request,response, data);
-    });
+   	// m_mycol.findData(function (result) {
+    //    data.data = result;
+    //    handler.processAjax(request,response, data);
+    //});
    
    }catch(e){
    	 handler.responseErr(500, e.message, request, response);

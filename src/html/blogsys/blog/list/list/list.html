@@ -1,0 +1,22 @@
+﻿<textarea name="txt" id="blog-list">
+<div class="m-bloglist">
+    <div>
+    <a href="#/m/blog/blogedit/">发布日志</a>
+    </div>
+    <div class="m-list j-flag">
+
+    </div>
+ </div>
+</textarea>
+
+<textarea name="jst" id="tpl-bloglist">
+<ul>
+    {list beg..end as y}
+	{var x=data[y]}
+    <li><a href="#">${x.title}</a><span class="time">${x.sendtime|format:"yyyy-MM-dd HH:mm:ss"}</span></li>
+   {/list}
+ </ul>
+
+</textarea>
+
+<textarea name="js" data-src="./list.js"></textarea>

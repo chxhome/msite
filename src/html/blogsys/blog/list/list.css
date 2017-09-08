@@ -1,0 +1,11 @@
+﻿body {
+}
+h1 {
+    color:#00f;font-size:10px;
+}
+.g-list {display:flex; flex-direction:row;}
+.g-list .left {flex:3;width:100%;}
+.g-list .right {flex:1;border-left:solid 1px #999;min-height:800px;padding:20px;}
+
+
+

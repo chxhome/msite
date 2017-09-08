@@ -1,0 +1,13 @@
+{{#block "sprites"}}
+.u-spr-{{options.group}} {
+    background-image: url({{{spritesheet.escaped_image}}}?v={{options.random}});
+    background-repeat: no-repeat;
+}
+{{#each sprites}}
+.u-spr-{{../options.group}}.u-sprc-{{name}} {
+  background-position: {{px.offset_x}} {{px.offset_y}};
+  width: {{px.width}};
+  height: {{px.height}};
+}
+{{/each}}
+{{/block}}

@@ -1,15 +1,26 @@
 ﻿{
 
   "modules": {
+    "/?/m/blog/list/list/": "blogsys/blog/list/tag/tag.html",
+    "/?/m/blog/list/tag/": "blogsys/blog/list/list/list.html",
+
     "/m": "blogsys/index.html",
     "/m/blog": "blogsys/blog/index.html",
-    "/m/blog/": "blogsys/blog/list/list.html",
-    "/m/blog/list": "blogsys/blog/list/list.html"
+    "/m/blog/list/": {
+      "module": "blogsys/blog/list/list.html",
+      "composite": {
+        "tag": "/?/m/blog/list/tag/",
+        "list": "/?/m/blog/list/list/"
+      }
+    },
+    "/m/blog/tags/": "blogsys/blog/tags/tags.html",
+    "/m/blog/tagedit/": "blogsys/blog/tags/edit.html",
+    "/m/blog/blogedit/": "blogsys/blog/list/edit.html"
   },
   "rules": {
     "rewrite": {
-      "404": "/m/blog/list",
-      "/m/blog/list": "/m"
+      "404": "/m/blog/list/",
+      "/m/blog/list": "/m/blog/"
     },
     "title": {
       "/m": "博客"
@@ -17,8 +28,13 @@
     "alias": {
       "blog-sys": "/m",
       "blog-index": "/m/blog",
-      "blog-blog": "/m/blog/",
-      "blog-list": "/m/blog/list"
+      "blog-list": "/m/blog/list/",
+      "blog-list-list": "/?/m/blog/list/list/",
+      "blog-list-tag": "/?/m/blog/list/tag/",
+      "blog-tags": "/m/blog/tags/",
+      "blog-tagedit": "/m/blog/tagedit/",
+      "blog-blogedit": "/m/blog/blogedit/"
+
     }
   }
 }

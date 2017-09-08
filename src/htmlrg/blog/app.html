@@ -1,0 +1,19 @@
+﻿<div class="g-body">
+    <div class="g-left j-flag">
+        <h1>{state.title}</h1>
+        <ul class="m-nav">
+            <li r-class={{"z-crt":showBlog}}><a href="#/m/blog/list/">博客日志</a></li>
+            <li r-class={{"z-crt":showSetting}}><a href="#/m/blog/setting/">博客设置</a></li>
+        </ul><h1>{state.blog.title}</h1><h2>{state.setting.title}</h2>
+    </div>
+    <div class="g-right j-flag">
+        <tab on-change={this.onTabChange($event)}></tab>
+        {#if state.blog.props.showBlog}
+        <bloglist blog={state.blog.blog} ref="blog"></bloglist>
+        {/if}
+
+        {#if state.blog.props.showTag}
+        <taglist tag={state.blog.tag} ref="blog"></taglist>
+        {/if}
+    </div>
+</div>

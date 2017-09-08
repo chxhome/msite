@@ -1,0 +1,14 @@
+﻿<div class="m-list">
+    {#if tag.showEdit}
+    <tagedit></tagedit>
+    {#else}
+        <div>
+            <a href="#/m/blog/tagedit/" on-click={this.onToEdit()}>添加标签</a>
+        </div>
+        <ul>
+            {#list tag.list as item}
+            <li><a href="#">${item.name}</a></li>
+            {/list}
+        </ul>
+    {/if}
+</div>

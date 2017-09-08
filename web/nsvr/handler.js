@@ -58,8 +58,11 @@ exports.processStatic = function (router, __request, __response) {
 };
 
 exports.responseErr = function (code, msg, __request, __response) {
-    console.log(">>>"+msg);
-    __response.writeHead(code, { "Content-Type": "text/html" });
+    console.log(">>>" + msg);
+    var resHeader = myutil.extend({
+        "Content-Type": "text/html;charset=utf-8"
+    }, commHeader);
+    __response.writeHead(code, resHeader);
     __response.end(msg);
 };
 //处理动态页面请求

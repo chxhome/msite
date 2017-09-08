@@ -1,0 +1,21 @@
+﻿<textarea name="txt" id="blog-tags">
+<div class="m-tags j-flag">
+
+ </div>
+</textarea>
+
+<textarea name="jst" id="tpl-tags">
+<div class="m-list">
+    <div>
+        <a href="#/m/blog/tagedit/">添加标签</a>
+    </div>
+    <ul>
+        {list data as item}
+        <li><a href="#">${item.name}</a></li>
+        {/list}
+    </ul>
+</div>
+
+</textarea>
+
+<textarea name="js" data-src="./tags.js"></textarea>

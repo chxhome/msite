@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>NEJ模板调度测试-博客系统</title>
+    <link href="/src/css/nejblog.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="app" class="g-module"></div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="../node_modules/redux/dist/redux.js"></script>
+    <script src="../node_modules/regularjs/dist/regular.js"></script>
+    <script src="/res/requirejs/require.js"></script>
+    <script>
+        requirejs.config({
+            //By default load any module IDs from js/lib
+            baseUrl: '/src/js/blogrg',
+            //except, if the module ID starts with "app",
+            //load it from the js/app directory. paths
+            //config is relative to the baseUrl, and
+            //never includes a ".js" extension since
+            //the paths config could be for a directory.
+            paths: {
+                c: 'component',
+                m:'/src/htmlrg',
+                redux: '/node_modules/redux/dist/redux',
+                text: '/node_modules/requirejs-text/text'
+            }
+        });
+        // Start the main app logic.
+        requirejs(['index'],function () {});
+
+    </script>
+</body>
+</html>
