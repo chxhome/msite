@@ -9,7 +9,13 @@
         data: {
             state: {}
         },
-
+        computed: {
+            ccc: {
+                get: function(data) {
+                    return data.state.showBlog + "-" + data.state.title;
+                }
+            }
+        },
         config: function (data) {
             //console.log(this.data);
         },

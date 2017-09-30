@@ -7,11 +7,11 @@ exports.index = function (request, response, viewdata) {
 };
 
 exports.nejindex = function (request, response, viewdata) {
-    return "/nejindex.html";
+    return "/indexnej.html";
 };
 
 exports.rgindex = function (request, response, viewdata) {
-    return "/rgindex.html";
+    return "/indexrg.html";
 };
 
 exports.getTagList = function (request, response, viewdata) {
