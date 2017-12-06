@@ -1,0 +1,47 @@
+@import './base/_config.mcss';
+@import './base/_prefix.mcss';
+@import './base/_base.mcss';
+@import './base/_func.mcss';
+html, body, .g-module { height: 100%; }
+.g-body { display: flex; flex-direction: row; height: 100%;
+    .g-left { width: 180px; border-right: $solid; padding: 10px; overflow: auto; }
+
+    .g-right { flex: 1; padding: 0; overflow: auto; }
+
+    .g-blog { padding: 0; position: relative; height: 100%;
+        .g-tab { background: #ddd; height: auto; }
+        .g-cont { flex: auto; position: absolute; top: 40px; left: 0; right: 0; bottom: 0; overflow: auto; padding: 10px; }
+    }
+}
+
+.m-nav {
+
+
+    li { height: 30px; line-height: 30px;
+
+        a { display: block; padding-left: 50px; }
+
+        a:hover { background: #009; color: #fff; }
+    }
+}
+
+.m-tab { background: #ddd;
+    a { display: block; background: #ddd; color: #111; float: left; width: 100px; height: 40px; line-height: 40px; text-align: center; }
+    a.z-crt { background: #666; color: #fff; }
+    $clearfix(); }
+.m-list {
+    li { line-height: 40px; display: flex; flex-direction: row;
+        a { flex: 4; display: block;
+            &:hover { background: #789; color: #fff; }
+        }
+        .time { flex: 1; padding-right: 10px; text-align: right; }
+    }
+}
+
+.m-form{
+    dl{padding:10px;}
+    dt{ display:inline-block;min-height:30px;width:180px;}
+    dd{ display:inline-block;min-height:30px;
+        .inp{height:30px;width:200px;outline:solid 1px #999;}
+    }
+}

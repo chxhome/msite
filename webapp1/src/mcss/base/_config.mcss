@@ -1,0 +1,218 @@
+$ff-arial = arial,'simsun';
+$ff-yahei = 'Microsoft YaHei','微软雅黑','宋体',helvetica,'Hiragino Sans GB';
+$ff-simsun = 'simsun',arial;
+
+/* 文字大小 */
+$fs0  = 12px;
+$fs1  = 14px;
+$fs2  = 16px;
+$fs3  = 18px;
+$fs4  = 20px;
+$fs5  = 22px;
+$fs6  = 24px;
+$fs7  = 28px;
+$fs8  = 36px;
+$fs9  = 80px;
+$fs10 = 120px;
+
+$bgColor-dark=#263238;
+$bgColor-light=#f2f6f7;
+$color-btn=#5ea7ec;
+$color-dark=#37474f;
+$color-light=#76838f;
+$color-white=#fff;
+$color-btn=#5ea7ec;
+$color-border=#e8eae9;
+$color-formBorder=#ccd5db;
+$color-link=#5ea7ec;
+$color-red=#f98b8a;
+
+$solid=solid 1px #009;
+/* 通用功能 */
+$clearfix = {
+    zoom:1;
+    &:after{display:block;clear:both;visibility:hidden;height:0;overflow:hidden;content:".";}
+}
+$full-box       = {position:absolute;top:0;left:0;right:0;bottom:0;}
+$inline-block   = {display:inline-block;*display:inline-blockine;*zoom:1;}
+$yahei          = {font-family:$ff-yahei;}
+$simsun         = {font-family:$ff-arial;}
+$justify        = {text-align:justify;text-justify:inter-ideograph;}
+$nowrap         = {word-wrap:normal;white-space:nowrap;}
+$pre            = {overflow:hidden;text-align:left;white-space:pre-wrap;word-wrap:break-word;word-break:break-all;}
+$pre-break-word = {white-space:pre-wrap;word-wrap:break-word;word-break:break-all;}
+$break-word     = {white-space:normal;word-wrap:break-word;word-break:break-all;}
+$ellipsis       = {overflow:hidden;word-wrap:normal;white-space:nowrap;text-overflow:ellipsis;}
+$ellipsisN       = ($lines=1){
+    overflow:hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+}
+$opacity        = ($oc=0){opacity:$oc;filter:alpha(opacity=round($oc * 100));}
+$hideText       = {overflow:hidden;text-indent:-20000px;}
+$background-radial = ($from,$to){
+    background-image:-webkit-radial-gradient($from,$to);
+    background-image:-moz-radial-gradient($from,$to);
+    background-image:-ms-radial-gradient($from,$to);
+    background-image:-o-radial-gradient($from,$to);
+    background-image:radial-gradient($from,$to);
+}
+$background-linear = ($dir,$from,$to){
+    background-image:-webkit-linear-gradient($dir,$from,$to);
+    background-image:-moz-linear-gradient($dir,$from,$to);
+    background-image:-ms-linear-gradient($dir,$from,$to);
+    background-image:-o-linear-gradient($dir,$from,$to);
+    background-image:linear-gradient($dir,$from,$to);
+}
+$keyframes = ($name, $block){
+    @-webkit-keyframes $name{
+        $block(-webkit-);
+    }
+    @-moz-keyframes $name{
+        $block(-moz-);
+    }
+    @-ms-keyframes $name{
+        $block(-ms-);
+    }
+    @-o-keyframes $name{
+        $block(-o-);
+    }
+    @keyframes $name{
+        $block('');
+    }
+}
+$size = ($width, $height){
+    $height ?= $width;
+    height: $height;
+    width: $width;
+}
+$box-sizing = ($type){
+    -webkit-box-sizing:$type;
+    -moz-box-sizing:$type;
+    box-sizing:$type;
+}
+$shadow = ($color1,$color2){
+    $box-shadow:inset 0 1px 0 $color1,inset 0 2px 0 $color2;
+}
+$shadow-bt = ($color1){
+    $box-shadow:inset 0 -1px 0 $color1;
+}
+$calc = ($num){
+    width: -webkit-calc($num);
+    width: -moz-calc($num);
+    width: calc($num);
+}
+$flex-column = {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction:column;
+    flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    align-content: stretch;
+    -webkit-align-content: stretch;
+    align-items: stretch;
+    -webkit-align-items: stretch;
+}
+$flex-row = {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-align-content: flex-end;
+    align-content: flex-end;
+}
+
+$arrow = ($size, $color, $border-width, $border-color,$left){
+    position: relative;
+    background: $color;
+    border: $border-width solid $border-color;
+    &:before, &:after{
+        bottom: 100%;
+        left: $left || 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+    &:after {
+        border-color: rgba($color, 0);
+        border-bottom-color: $color;
+        border-width: $size;
+        margin-left: -$size;
+
+    }
+    &:before{
+        border-color: rgba($border-color, 0);
+        border-bottom-color: $border-color;
+        border-width: $size + $border-width;
+        margin-left: -$size - $border-width;
+    }
+}
+
+/* 滚动条 */
+$scroll =
+{
+    &::-webkit-scrollbar {
+        width: 7px;
+    }
+
+    &::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 3px;
+        background: #dddfe0;
+    }
+
+    &::-webkit-scrollbar-track {
+        width: 7px;
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+        background: transparent;
+    }
+
+}
+
+/**
+ * 表格边框
+ */
+$tableSeparate = {
+    border-collapse: separate;
+    border:1px solid #CCCCCC;
+    td, th{
+        border-bottom:1px solid #CCCCCC;
+    }
+        border-bottom:0px;
+        border-radius: 4px;
+    tr:first-child th:first-child { border-top-left-radius: 4px; }
+    tr:first-child th:last-child { border-top-right-radius: 4px; }
+    tr:last-child td:first-child { border-bottom-left-radius: 4px; }
+    tr:last-child td:last-child { border-bottom-right-radius: 4px; }
+
+    th{
+        color:#37474f;
+    }
+    a{
+        color:#37474f;
+    }
+
+    .superadmin{
+        color:#F6BE80;
+    }
+}

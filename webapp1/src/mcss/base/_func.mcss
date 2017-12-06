@@ -1,0 +1,65 @@
+/**
+ * description:  NEC函数集合
+ * author:       hzfangbo@corp.netease.com;
+ */
+.f-cb,.f-cbli li{$clearfix();}
+.f-ff1{$yahei();}
+.f-fs0{font-size:$fs0;}
+.f-fs1{font-size:$fs1;}
+.f-ib{$inline-block();}
+.f-taj{$justify();}
+.f-wsn{$nowrap();}
+.f-pre{$pre();}
+.f-wwb{$break-word();}
+.f-toe{$ellipsis();}
+.f-dn{display:none !important;}
+.f-db{display:block !important;}
+.f-hd{position:absolute;width:1px;height:1px;font-size:1px;overflow:hidden;}
+.f-fl{float:left;}
+.f-fr{float:right;}
+.f-pad10{padding: 10px;}
+.f-clr{$clearfix();}
+.f-cp{cursor:pointer;}
+.f-vam,.f-vama *{vertical-align:middle;}
+.f-du,.f-du:hover{text-decoration:underline;}
+.f-db{display:block;}
+.f-vih{visibility:hidden;}
+.f-viv{visibility:visible !important;}
+.f-full{$full-box();width:100%;height:100%;overflow:hidden;}
+.f-scrocnt{height:100%;overflow:hidden;}
+.f-absolute{position: absolute;}
+.f-relative{position:relative;}
+.f-static{position: static!important;}
+.f-ime-dis{ime-mode:disabled;-webkit-ime-mode:disabled;}
+.f-fullheight{height:100%;}
+.f-ellipsis{$ellipsis()}
+.f-flex{display: flex;flex-direction: column;flex-wrap: nowrap;
+    justify-content: flex-start;align-content:stretch;align-items: stretch;}
+.f-center{
+    text-align: center;
+}
+.f-left{
+    text-align: left;
+}
+.f-right{
+    text-align: right;
+}
+.f-vertical-center{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.f-hidden{
+    overflow:hidden;
+}
+.f-ov{
+    overflow:visible !important;
+}
+.f-bsb{
+    box-sizing: border-box!important;
+}
+.f-addscroll {
+  overflow-y: auto;
+}
