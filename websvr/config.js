@@ -1,4 +1,4 @@
-﻿var configEnv = require("./config-env"),
+﻿var configEnv = require("./config-env");
 
 //连接字符串
 var config = {
