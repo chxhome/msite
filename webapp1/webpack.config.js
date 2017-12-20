@@ -32,7 +32,8 @@ module.exports = {
                     'babel-loader',
                 ],
                 exclude: /node_modules/
-            },{
+            }
+            ,{
                 test:/\.css$/,
                 loader: 'style-loader!css-loader'
             }
@@ -41,6 +42,12 @@ module.exports = {
     plugins: [
         //new webpack.HotModuleReplacementPlugin(),
         //new webpack.NamedModulesPlugin()
+        //new webpack.optimize.CommonsChunkPlugin('vendor',  'vendor.js'),
+        new webpack.optimize.UglifyJsPlugin({
+          compress: {
+            warnings: false
+          }
+        })
     ],
     devtool: "cheap-eval-source-map"
 

@@ -1,12 +1,10 @@
-﻿//document.getElementById("app").innerHTML = "333333eee666rrrrr6663333333";
-
-import React from 'react';
+﻿import React from 'react';
 import store from "../../js/store.js";
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux';
 import Logo from "../logo/logo.js";
 import Nav from "../nav/nav.js";
 import actions from "../../js/actions.js";
-import {Switch,BrowserRouter,Router,Route,IndexRoute} from 'react-router-dom';
+import {Switch,Route} from 'react-router-dom';
 
 import Home from "../home/home";
 import Daily from "../daily/daily";
