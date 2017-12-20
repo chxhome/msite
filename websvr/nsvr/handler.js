@@ -4,13 +4,14 @@ util = require("util"),
 myutil = require("./myutil");
 	fs = require("fs"),
     Freemarker = require('freemarker.js');
-var serverRespath = __dirname.replace("/","\\").replace("nsvr","");
+var serverRespath = __dirname.replace("nsvr","");
 var viewpathPrefix = serverRespath + "view/"
 	//基本头信息
 var commHeader = {"Server": "websvr1.0.1"};
 
 var getController = function (router) {
     var controllerPath = serverRespath + "controller/" + router["controller"];
+    controllerPath=controllerPath.replace("\\","/");
     try{
         return require(controllerPath);
     }
@@ -30,10 +31,11 @@ exports.process = function (router, request, response) {
         return;
     }
     if (pathname.indexOf(".html") > 1) {
+    	var _this=this;
 			fs.readFile(config.docDir+pathname.substring(1), function(err, data) {
 				if(err){
 					//处理动态页面
-				    this.processPage(router, request, response);
+				    _this.processPage(router, request, response);
 				}else{
 					var resHeader = myutil.extend({
 	               		 "Content-Type": "text/html charset=UTF-8"

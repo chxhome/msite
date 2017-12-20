@@ -1,0 +1,15 @@
+.u-ipt{
+	width:350px;
+	padding:10px;
+    height: 40px;
+	line-height: 20px;
+    box-sizing:border-box;
+    border-radius:2px;
+	border:1px solid #c6cacb;
+	color:#37474f;
+	&:focus{
+		border:1px solid #4e97d9 ;
+	};
+}
+
+.u-ipt-text{height:auto;min-height: 60px;}
