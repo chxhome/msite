@@ -1,4 +1,6 @@
-﻿//连接字符串
+﻿var configEnv = require("./config-env"),
+
+//连接字符串
 var config = {
     mongodbConnStr: 'mongodb://localhost:27017/dbchx',//mongodb数据库链接字符串
     docDir: "D:/TestCodes/msite/webapp1/",//网站所在的磁盘目录
@@ -37,5 +39,8 @@ var config = {
         ajax: "application/json"
     }
 };
-
+//特定环境的配置文件优先
+for(var k in configEnv){
+    config[k.toString()]=configEnv[k.toString()];
+}
 module.exports = config;
