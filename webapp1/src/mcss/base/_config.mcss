@@ -1,6 +1,6 @@
-$ff-arial = arial,'simsun';
-$ff-yahei = 'Microsoft YaHei','微软雅黑','宋体',helvetica,'Hiragino Sans GB';
-$ff-simsun = 'simsun',arial;
+$ff-arial = 'arial','simsun';
+$ff-yahei = 'Microsoft YaHei','微软雅黑','宋体','helvetica','Hiragino Sans GB';
+$ff-simsun = 'simsun','arial';
 
 /* 文字大小 */
 $fs0  = 12px;
@@ -16,7 +16,7 @@ $fs9  = 80px;
 $fs10 = 120px;
 
 $bgColor-dark=#263238;
-$bgColor-light=#f2f6f7;
+$bgColor-light=#e2e6e7;
 $color-btn=#5ea7ec;
 $color-dark=#37474f;
 $color-light=#76838f;

@@ -2,11 +2,12 @@
 import {render} from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
+import _exdbase from "../js/extend/base";
 import App from "./root/root";
 import Home from "./home/home";
 import Logo from "./logo/logo";
 import Daily from "./daily/daily";
-import {Switch,HashRouter,Router,Route,Link,IndexLink,hashHistory} from 'react-router-dom';
+import {BrowserRouter,Switch,HashRouter,Router,Route,Link,IndexLink,hashHistory} from 'react-router-dom';
 
 // const render = (Component) => {
 //     ReactDOM.render(

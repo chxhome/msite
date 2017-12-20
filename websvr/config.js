@@ -1,6 +1,6 @@
 ﻿//连接字符串
 var config = {
-    mongodbConnStr: 'mongodb://localhost:27017/dblog',//mongodb数据库链接字符串
+    mongodbConnStr: 'mongodb://localhost:27017/dbchx',//mongodb数据库链接字符串
     docDir: "D:/TestCodes/msite/webapp1/",//网站所在的磁盘目录
     port:8000,
     //网站默认的路由规则

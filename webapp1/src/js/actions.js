@@ -17,14 +17,35 @@ var _baseActionCreators = {
 
     },
 
+    saveDaily:function(data,cb){
+        var url="/daily/addDaily";
+        if(data.id){
+            url='/daily/updateDaily';
+        }
+        //return function(dispatch) {
+             axios.post(url,data)
+            .then(function (response) {
+                console.log(response);
+                // dispatch({
+                //     type: '_saveDaily',
+                //     data: response.data
+                // });
+                cb();
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+
+        //}
+    },
     getDailyList:function(){
         return function(dispatch) {
-             axios.get('/blog/getBlogList')
+             axios.get('/daily/getDailyList')
             .then(function (response) {
                 console.log(response);
                 dispatch({
                     type: 'GetDailyList',
-                    data: response.data.data
+                    data: response.data
                 });
             })
             .catch(function (error) {

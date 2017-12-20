@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Logo from "../logo/logo.js";
 import Nav from "../nav/nav.js";
 import actions from "../../js/actions.js";
-import {BrowserRouter,Router,Route,IndexRoute} from 'react-router-dom';
+import {Switch,BrowserRouter,Router,Route,IndexRoute} from 'react-router-dom';
 
 import Home from "../home/home";
 import Daily from "../daily/daily";
@@ -55,11 +55,14 @@ class App extends React.Component {
                         <Nav/>
                     </div>
                     <div className="g-cont j-flag">
-                      <Route path="/" component={Home} exact></Route>
+                    <Switch>
+                      <Route path="/" component={Home} exact strict></Route>
                       <Route path="/daily">
                           <Daily state={state.daily}/>
                       </Route>
+                    </Switch>
                     </div>
+
                 </div>
         </div>
       );

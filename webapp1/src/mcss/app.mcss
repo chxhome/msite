@@ -1,7 +1,10 @@
-@import './base/_config.mcss';
-@import './base/_prefix.mcss';
-@import './base/_base.mcss';
-@import './base/_func.mcss';
+@import './base/_index.mcss';
+@import './unit/_unit.mcss';
+@import './unit/_crumbs.mcss';
+@import './unit/_btn.mcss';
+@import './common/_table.mcss';
+@import './common/_form.mcss';
+
 html, body, .g-module { height: 100%; }
 #app{height:100%;}
 .g-body { display: flex; flex-direction: column; height: 100%;
@@ -9,16 +12,15 @@ html, body, .g-module { height: 100%; }
     .g-main{
        display: flex; flex-direction: row;height:100%;
      }
-    .g-nav { background:#333744;color:#fff; width: 180px; border-right: $solid; padding: 10px; overflow: auto; }
+    .g-nav { background:#333744;color:#fff; width: 120px; border-right: $solid; padding: 10px; overflow: auto; }
 
-    .g-cont { flex: 1; padding: 0; overflow: auto; }
+    .g-cont { flex: 1; padding: 10px; overflow: auto; }
 
 }
 
-
-.g-blog { padding: 0; position: relative; height: 100%;
-    .g-tab { background: #ddd; height: auto; }
-    .g-cont { flex: auto; position: absolute; top: 40px; left: 0; right: 0; bottom: 0; overflow: auto; padding: 10px; }
+.m-title{
+    min-height: 30px;
+    h1{font-size:20px;}
 }
 
 .m-nav {
@@ -26,7 +28,7 @@ html, body, .g-module { height: 100%; }
 
     li { height: 30px; line-height: 30px;
 
-        a { display: block; padding-left: 50px; }
+        a { display: block; padding-left: 20px; }
 
         a:hover { background: #009; color: #fff; }
     }
@@ -45,10 +47,3 @@ html, body, .g-module { height: 100%; }
     }
 }
 
-.m-form{
-    dl{padding:10px;}
-    dt{ display:inline-block;min-height:30px;width:180px;}
-    dd{ display:inline-block;min-height:30px;
-        .inp{height:30px;width:200px;outline:solid 1px #999;}
-    }
-}

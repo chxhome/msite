@@ -37,7 +37,9 @@ var _user=function (state = {}, action) {
         switch (action.type) {
             case "GetDailyList":
                 var _state = Object.assign({}, state);
-                _state.list=action.data;
+                var dd=action.data;console.log(dd);
+                _state.list=dd.data;
+                _state.loading=false;
                 return _state;
             default:
                 return state;
