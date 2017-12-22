@@ -16,7 +16,7 @@ var _baseActionCreators = {
         }
 
     },
-
+    //no-reducer
     saveDaily:function(data,cb){
         var url="/daily/addDaily";
         if(data.id){
@@ -38,6 +38,22 @@ var _baseActionCreators = {
 
         //}
     },
+    //no-reducer
+    importDaily:function(data,cb){
+        var url="/daily/importDaily";
+        //return function(dispatch) {
+             axios.post(url,data)
+            .then(function (response) {
+                console.log(response);
+                cb();
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+
+        //}
+    },
+
     getDailyList:function(){
         return function(dispatch) {
              axios.get('/daily/getDailyList')

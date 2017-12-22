@@ -38,7 +38,7 @@ class DailyList extends React.Component {
            <dl className="u-crumbs">
               <dt>消费管理</dt>
               <dd>消费列表</dd>
-              <dd className="right"><Link to="/daily/edit">创建</Link></dd>
+              <dd className="right"><Link to="/daily/edit">创建</Link><Link to="/daily/import">导入</Link></dd>
            </dl>
            <div className="m-table">
               <NoData nodata={state.list.length<=0}/>

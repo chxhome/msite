@@ -11,7 +11,7 @@ var commHeader = {"Server": "websvr1.0.1"};
 
 var getController = function (router) {
     var controllerPath = serverRespath + "controller/" + router["controller"];
-    controllerPath=controllerPath.replace("\\","/");
+    controllerPath=controllerPath.replace(/\\/gi,"/");
     try{
         return require(controllerPath);
     }
@@ -57,6 +57,7 @@ exports.process = function (router, request, response) {
 //处理静态资源请求
 exports.processStatic = function (router, __request, __response) {
 	try{
+		//console.log("processStatic");
 		var pathname = router.pathname;
 	    var filePath = config.docDir + pathname.substring(1);
 	    console.log("静态文件路径：" + filePath);
@@ -90,6 +91,7 @@ exports.responseErr = function (code, msg, __request, __response) {
 //处理动态页面请求
 exports.processPage = function (router, __request, __response) {
 	try{
+		console.log("processPage");
 	    var controller = getController(router);
 	    if (!controller) {
 	        this.responseErr(500, "获取控制器失败", __request, __response);

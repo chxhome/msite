@@ -1,5 +1,6 @@
 ﻿var formidable = require("formidable");
 var handler = require("../nsvr/handler");
+var config = require("../config");
 //var m_mycol = require('../model/mycol');
 exports.index = function (request, response, viewdata) {
     viewdata.title = "这是测试首页";
@@ -17,6 +18,7 @@ exports.vuetest = function (request, response, viewdata) {
 var fileDir = "../site/upfiles";
 exports.upload = function (request, response, viewdata, params) {
     var form = new formidable.IncomingForm();
+    var fileDir = config.docDir+"res";
     form.uploadDir = fileDir + "/tmp";
     form.parse(request, function (err, fields, files) {
         //fs.renameSync(files.upload.path, fileDir + "/test.jpg");
