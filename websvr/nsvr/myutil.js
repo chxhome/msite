@@ -17,3 +17,10 @@ exports.extend = function (srcObj,exdObj) {
     }
     return srcObj;
 };
+
+exports.xlsNumber2Date=function(num){
+        num=+num;
+        var date=new Date(1900,0,0);
+        date=new Date(date.getTime()+num*24*60*60*1000);
+        return date;
+}

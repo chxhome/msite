@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom';
 import actions from "../../js/actions.js";
 import NoData from "../common/unit/nodata.js";
 import Loading from "../common/unit/loading.js";
+import util from "../../js/extend/util.js";
+import dailyEnum from "../../js/enums/daily.js";
 class DailyList extends React.Component {
     constructor(props) {
       super(props);
@@ -19,14 +21,14 @@ class DailyList extends React.Component {
       let _list=state.list.map((item) => {
                       return (
                         <tr>
-                          <td>{item.time}</td>
+                          <td>{util.timeFormat(item.time,"yyyy-MM-dd")}</td>
                           <td>{item.place}</td>
                           <td>{item.persons}</td>
                           <td>{item.money}</td>
                           <td>{item.content}</td>
-                          <td>{item.exptype}</td>
+                          <td>{dailyEnum.getExpTypeName(item.exptype)}</td>
                           <td>{item.event}</td>
-                          <td>{item.importance}</td>
+                          <td>{dailyEnum.getImportancesName(item.importance)}</td>
                           <td>操作</td>
                         </tr>
                       )

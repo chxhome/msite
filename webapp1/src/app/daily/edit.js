@@ -8,6 +8,8 @@ import SelectHtml from "../common/form/select.js";
 import UcDate from "../common/form/date.js";
 import UcDateTime from "../common/form/datetime.js";
 
+import dailyEnum from "../../js/enums/daily.js";
+
 // {
 //     "_id" : 0,
 //     "id" : "20171212001",
@@ -40,8 +42,8 @@ class DailyEdit extends React.Component {
 		    "importance" : "1"
     	},
     	uiData:{
-    		exptypes:[{"text":"未知","value":0},{"text":"购物","value":1},{"text":"教育","value":2},{"text":"饮食","value":3},{"text":"玩乐","value":4}],
-    		importances:[{"text":"可避免","value":0},{"text":"一般","value":1},{"text":"重要","value":2},{"text":"必须","value":3},{"text":"非常重要","value":4}]
+    		exptypes:dailyEnum.exptypes,//[{"text":"未知","value":0},{"text":"购物","value":1},{"text":"教育","value":2},{"text":"饮食","value":3},{"text":"玩乐","value":4}],
+    		importances:dailyEnum.importances//[{"text":"可避免","value":0},{"text":"一般","value":1},{"text":"重要","value":2},{"text":"必须","value":3},{"text":"非常重要","value":4}]
     	}
     };
   }
