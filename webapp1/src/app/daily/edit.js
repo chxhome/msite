@@ -75,7 +75,7 @@ class DailyEdit extends React.Component {
 		fd.money=this.refs.money.getValue();
 		console.log(fd);
 		actions.saveDaily(fd,function(){
-			window.location.href="http://127.0.0.1:8000/build/index.html#/daily/list";
+			window.location.href="/build/index.html#/daily/list";
 		});
  	}
 

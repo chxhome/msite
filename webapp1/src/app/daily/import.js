@@ -50,7 +50,7 @@ class DailyImport extends React.Component {
  	onSave(){
  		let formData = new FormData(this.refs.form);
 		actions.importDaily(formData,function(){
-			window.location.href="http://127.0.0.1:8000/build/index.html#/daily/list";
+			window.location.href="/build/index.html#/daily/list";
 		});
  	}
 
