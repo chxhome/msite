@@ -26,7 +26,8 @@ class _Date extends React.Component {
             valueNumber:event.target.valueAsNumber
           };
         this.setState({
-         dvalue:obj.value
+         dvalue:obj.value,
+         value:obj
         });
        if(this.props["on-change"]){
           this.props["on-change"](obj);
