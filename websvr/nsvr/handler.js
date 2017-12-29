@@ -91,13 +91,15 @@ exports.processStatic = function (router, __request, __response) {
 		            }
 			        var exdName = pathname.substring(pathname.lastIndexOf(".") + 1);
 			        console.log(exdName);
-			        var resHeader = myutil.extend({
-                            "Content-Type": "text/html;charset=utf-8",
-                            "Expires":date.toUTCString(),
-                            "Cache-Control":"max-age=" + CACHE_TIME,
-                            "Last-Modified":lastModified
+			        var date = new Date();
+        			date.setTime(date.getTime() + CACHE_TIME * 1000);
+                    var resHeader = myutil.extend({
+                        "Content-Type": "text/html;charset=utf-8",
+                        "Expires":date.toUTCString(),
+                        "Cache-Control":"max-age=" + CACHE_TIME,
+                        "Last-Modified":lastModified
 
-                        }, commHeader);
+                    }, commHeader);
 			        __response.writeHead(200, resHeader);
 			        __response.end(data);
 			    });
