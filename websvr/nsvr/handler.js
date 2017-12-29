@@ -94,7 +94,7 @@ exports.processStatic = function (router, __request, __response) {
 			        var date = new Date();
         			date.setTime(date.getTime() + CACHE_TIME * 1000);
                     var resHeader = myutil.extend({
-                        "Content-Type": "text/html;charset=utf-8",
+                        "Content-Type": config.mime[exdName],
                         "Expires":date.toUTCString(),
                         "Cache-Control":"max-age=" + CACHE_TIME,
                         "Last-Modified":lastModified
@@ -151,7 +151,7 @@ exports.processPage = function (router, __request, __response) {
 	        console.log(">>>---"+viewRealPath);
 	        fs.readFile(viewRealPath, function(err, data) {
 	            var resHeader = myutil.extend({
-	                "Content-Type": "text/html charset=UTF-8"
+	                "Content-Type": "text/html charset=utf-8"
 	            }, commHeader);
 	            console.log(resHeader);
 	            __response.writeHead(200, resHeader);
