@@ -8,6 +8,7 @@ var serverRespath = __dirname.replace("nsvr","");
 var viewpathPrefix = serverRespath + "view/"
 	//基本头信息
 var commHeader = {"Server": "websvr1.0.1"};
+var CACHE_TIME = 60*60*24*365;
 
 var getController = function (router) {
     var controllerPath = serverRespath + "controller/" + router["controller"];
@@ -30,22 +31,40 @@ exports.process = function (router, request, response) {
         this.processStatic(router, request, response);
         return;
     }
+
     if (pathname.indexOf(".html") > 1) {
+    	var realPath=config.docDir+pathname.substring(1);
+	    fs.exists(realPath, function(exists){
+	    	if(exists){
+	    		var fileInfo = fs.statSync(realPath);
+                var lastModified = fileInfo.mtime.toUTCString();
+	    		fs.readFile(realPath, function(err, data) {
+					if(err){
+						//处理动态页面
+					    _this.processPage(router, request, response);
+					}else{
+						var date = new Date();
+            			date.setTime(date.getTime() + CACHE_TIME * 1000);
+                        var resHeader = myutil.extend({
+                            "Content-Type": "text/html;charset=utf-8",
+                            "Expires":date.toUTCString(),
+                            "Cache-Control":"max-age=" + CACHE_TIME,
+                            "Last-Modified":lastModified
+
+                        }, commHeader);
+			            console.log(resHeader);
+			            response.writeHead(200, resHeader);
+			            response.end(data);
+					}
+		            
+		        });
+	    	}else{
+	    		exports.responseErr(400, "找不到文件", request, response);
+	    	}
+
+	    });
     	var _this=this;
-			fs.readFile(config.docDir+pathname.substring(1), function(err, data) {
-				if(err){
-					//处理动态页面
-				    _this.processPage(router, request, response);
-				}else{
-					var resHeader = myutil.extend({
-	               		 "Content-Type": "text/html charset=UTF-8"
-		            }, commHeader);
-		            console.log(resHeader);
-		            response.writeHead(200, resHeader);
-		            response.end(data);
-				}
-	            
-	        });
+			
 
     }else{
     	//处理动态页面
@@ -61,7 +80,10 @@ exports.processStatic = function (router, __request, __response) {
 		var pathname = router.pathname;
 	    var filePath = config.docDir + pathname.substring(1);
 	    console.log("静态文件路径：" + filePath);
-        fs.readFile(filePath, function (err, data) {
+
+	    var fileInfo = fs.statSync(filePath);
+        var lastModified = fileInfo.mtime.toUTCString();
+        fs.readFile(filePath,"binary", function (err, data) {
             if (err) {
                 exports.responseErr(404, "not find", __request, __response);
                 return;
@@ -72,7 +94,8 @@ exports.processStatic = function (router, __request, __response) {
 	            "Content-Type": config.mime[exdName]//根据扩展名，设置header的输出文件类型
 	        }, commHeader);
 	        __response.writeHead(200, resHeader);
-	        __response.end(data);
+	        __response.write(data, "binary");
+	        __response.end();
 	    });
 	}catch(e){
 		this.responseErr(500, e.message, __request, __response);
@@ -136,19 +159,27 @@ exports.processPage = function (router, __request, __response) {
 	                        /** for fmpp */
 	                    }
 	                });
+	                var fileInfo = fs.statSync(viewFilePath);
+            		var lastModified = fileInfo.mtime.toUTCString();
 	                //console.log(_viewPath + "." + config.viewExdName);
 	                fm.render(_viewPath + "." + config.viewExdName, viewdata, function (err, html, output) {
 	                    console.log(err);
 	                    if (!err) {
+	                    	var date = new Date();
+                			date.setTime(date.getTime() + CACHE_TIME * 1000);
 	                        var resHeader = myutil.extend({
-	                            "Content-Type": "text/html;charset=utf-8"
+	                            "Content-Type": "text/html;charset=utf-8",
+	                            "Expires":date.toUTCString(),
+	                            "Cache-Control":"max-age=" + CACHE_TIME,
+	                            "Last-Modified":lastModified
+
 	                        }, commHeader);
 	                        __response.writeHead(200, resHeader);
 	                        __response.end(html);
 	                    }
 	                });
 	            } else {
-	                exports.responseErr(500, "找不到视图文件", __request, __response);
+	                exports.responseErr(400, "找不到视图文件", __request, __response);
 	                return;
 	            }
 	           

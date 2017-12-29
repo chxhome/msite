@@ -71,6 +71,7 @@ class DailyEdit extends React.Component {
  		fd.time=this.refs.time.getValue().valueNumber;
  		fd.persons=this.refs.persons.getValue();
 		fd.content=this.refs.content.getValue();
+        fd.place=this.refs.place.getValue();
 		fd.event=this.refs.event.getValue();
 		fd.money=this.refs.money.getValue();
 		console.log(fd);
@@ -96,7 +97,7 @@ class DailyEdit extends React.Component {
          	</dl>
          	<dl>
          		<dt>地点：</dt>
-         		<dd><Text value={fd.place} ref="place" on-change={this.onPlaceChange.bind(this)}/></dd>
+         		<dd><Text value={fd.place} ref="place"/></dd>
          	</dl>
          	<dl>
          		<dt>人物：</dt>
