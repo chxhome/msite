@@ -41,6 +41,7 @@ exports.process = function (router, request, response) {
 	    		var fileInfo = fs.statSync(realPath);
                 var lastModified = fileInfo.mtime.toUTCString();
 	    		fs.readFile(realPath, function(err, data) {
+
 					if(err){
 						//处理动态页面
 					    _this.processPage(router, request, response);
@@ -86,7 +87,10 @@ exports.processStatic = function (router, __request, __response) {
 			if(exists){
 				var fileInfo = fs.statSync(filePath);
 		        var lastModified = fileInfo.mtime.toUTCString();
-		        fs.readFile(filePath, function (err, data) {
+
+		        var err=false;
+	    		var data=fs.readFileSync(filePath);
+		        //fs.readFile(filePath, function (err, data) {
 		            if (err) {
 		                exports.responseErr(404, "not find", __request, __response);
 		                return;
@@ -104,7 +108,7 @@ exports.processStatic = function (router, __request, __response) {
                     }, commHeader);
 			        __response.writeHead(200, resHeader);
 			        __response.end(data);
-			    });
+			    //});
 			}else{
 				this.responseErr(400, "找不到文件", __request, __response);
 			}
