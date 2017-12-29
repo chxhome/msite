@@ -8,8 +8,10 @@ var serverRespath = __dirname.replace("nsvr","");
 var viewpathPrefix = serverRespath + "view/"
 	//基本头信息
 var commHeader = {"Server": "websvr1.0.1"};
-var CACHE_TIME = 60*60*24*365;
-
+var CACHE_TIME_YEAR = 60*60*24*365;
+var CACHE_TIME_DAY = 60*60*24;
+var CACHE_TIME_HOUE = 60*60;
+var CACHE_TIME = 10;
 var getController = function (router) {
     var controllerPath = serverRespath + "controller/" + router["controller"];
     controllerPath=controllerPath.replace(/\\/gi,"/");
