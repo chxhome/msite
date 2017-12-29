@@ -23,6 +23,35 @@ var getController = function (router) {
     }
     return null;
 };
+
+var sendFileToClient=function(filePath, __response,_headers){
+	fs.exists(filePath, function(exists){
+		if(exists){
+			var fileInfo = fs.statSync(filePath);
+	        var lastModified = fileInfo.mtime.toUTCString();
+			var stream = fs.createReadStream(filePath,{flags:"r",encoding:null});
+		    stream.on("error", function() {
+		        exports.responseErr(500, "服务器错误", __response);
+		    });
+		    var date = new Date();
+			date.setTime(date.getTime() + CACHE_TIME * 1000);
+		    var resHeader = myutil.extend({
+		        "Expires":date.toUTCString(),
+		        "Cache-Control":"max-age=" + CACHE_TIME,
+		        "Last-Modified":lastModified
+
+		    }, commHeader);
+		    resHeader = myutil.extend(resHeader, _headers);
+		    __response.writeHead(200, resHeader);
+		    //返回文件内容
+		    stream.pipe(__response);
+	    }else{
+ 			exports.responseErr(400, "not find", __response);
+	    }
+	});
+	
+};
+
 exports.process = function (router, request, response) {
     console.log(">>>handler.process router:");
     console.log(router);
@@ -36,39 +65,7 @@ exports.process = function (router, request, response) {
 
     if (pathname.indexOf(".html") > 1) {
     	var realPath=config.docDir+pathname.substring(1);
-	    fs.exists(realPath, function(exists){
-	    	if(exists){
-	    		var fileInfo = fs.statSync(realPath);
-                var lastModified = fileInfo.mtime.toUTCString();
-	    		fs.readFile(realPath, function(err, data) {
-
-					if(err){
-						//处理动态页面
-					    _this.processPage(router, request, response);
-					}else{
-						var date = new Date();
-            			date.setTime(date.getTime() + CACHE_TIME * 1000);
-                        var resHeader = myutil.extend({
-                            "Content-Type": "text/html;charset=utf-8",
-                            "Expires":date.toUTCString(),
-                            "Cache-Control":"max-age=" + CACHE_TIME,
-                            "Last-Modified":lastModified
-
-                        }, commHeader);
-			            console.log(resHeader);
-			            response.writeHead(200, resHeader);
-			            response.end(data);
-					}
-		            
-		        });
-	    	}else{
-	    		exports.responseErr(400, "找不到文件", request, response);
-	    	}
-
-	    });
-    	var _this=this;
-			
-
+	    sendFileToClient(realPath,response,{"Content-Type":"text/html;charset=utf-8"});
     }else{
     	//处理动态页面
     	this.processPage(router, request, response);
@@ -83,60 +80,16 @@ exports.processStatic = function (router, __request, __response) {
 		var pathname = router.pathname;
 	    var filePath = config.docDir + pathname.substring(1);
 	    console.log("静态文件路径：" + filePath);
-		fs.exists(filePath, function(exists){
-			if(exists){
-				var fileInfo = fs.statSync(filePath);
-		        var lastModified = fileInfo.mtime.toUTCString();
-		     //    s.readFile(filePath, function (err, data) {
-		     //        if (err) {
-		     //            exports.responseErr(404, "not find", __request, __response);
-		     //            return;
-		     //        }
-			    //     var exdName = pathname.substring(pathname.lastIndexOf(".") + 1);
-			    //     console.log(exdName);
-			    //     var date = new Date();
-       //  			date.setTime(date.getTime() + CACHE_TIME * 1000);
-       //              var resHeader = myutil.extend({
-       //                  "Content-Type": config.mime[exdName],
-       //                  "Expires":date.toUTCString(),
-       //                  "Cache-Control":"max-age=" + CACHE_TIME,
-       //                  "Last-Modified":lastModified
-
-       //              }, commHeader);
-			    //     __response.writeHead(200, resHeader);
-			    //     __response.end(data);
-			    // });
-
-			    var stream = fs.createReadStream(filePath,{flags:"r",encoding:null});
-	            stream.on("error", function() {
-	                this.responseErr(500, "服务器错误", __request, __response);
-	            });
-	             var exdName = pathname.substring(pathname.lastIndexOf(".") + 1);
-                 var date = new Date();
-    			date.setTime(date.getTime() + CACHE_TIME * 1000);
-                var resHeader = myutil.extend({
-                    "Content-Type": config.mime[exdName],
-                    "Expires":date.toUTCString(),
-                    "Cache-Control":"max-age=" + CACHE_TIME,
-                    "Last-Modified":lastModified
-
-                }, commHeader);
-		        __response.writeHead(200, resHeader);
-	            //返回文件内容
-	            stream.pipe(__response);
-			}else{
-				this.responseErr(400, "找不到文件", __request, __response);
-			}
-
-		});
-	    
+	    var exdName = pathname.substring(pathname.lastIndexOf(".") + 1);
+	    sendFileToClient(filePath,__response,{"Content-Type": config.mime[exdName]});
+    
 	}catch(e){
-		this.responseErr(500, e.message, __request, __response);
+		this.responseErr(500, e.message, __response);
 	}
     
 };
 
-exports.responseErr = function (code, msg, __request, __response) {
+exports.responseErr = function (code, msg, __response) {
     console.log(">>>" + msg);
     var resHeader = myutil.extend({
         "Content-Type": "text/html;charset=utf-8"
@@ -150,7 +103,7 @@ exports.processPage = function (router, __request, __response) {
 		console.log("processPage");
 	    var controller = getController(router);
 	    if (!controller) {
-	        this.responseErr(500, "获取控制器失败", __request, __response);
+	        this.responseErr(500, "获取控制器失败", __response);
 	        return;
 	    }
 	    var viewdata = myutil.extend({}, { params: router.params });
@@ -158,7 +111,7 @@ exports.processPage = function (router, __request, __response) {
 	
 	    var actionFn = controller[action];
 	    if (typeof actionFn !== "function") {
-	        this.responseErr(404, "获取页面失败", __request, __response);
+	        this.responseErr(404, "获取页面失败", __response);
 	        return;
 	    }
 	    var _viewPath = actionFn(__request, __response, viewdata);
@@ -166,18 +119,11 @@ exports.processPage = function (router, __request, __response) {
 	       // __response.end();
 	        return;//未指定视图文件，有可能是异步请求
 	    }
-	    //当用户在action方法里直接返回带.html扩展名的文件时，不作为freemarker模板文件解析
+	    //当用户在action方法里直接返回带.html扩展名的文件时，不作为freemarker模板文件解析,直接输出静态文件
 	    if (_viewPath.indexOf(".html") > 1) {
 	        var viewRealPath = viewpathPrefix + router.controller + _viewPath;
 	        console.log(">>>---"+viewRealPath);
-	        fs.readFile(viewRealPath, function(err, data) {
-	            var resHeader = myutil.extend({
-	                "Content-Type": "text/html charset=utf-8"
-	            }, commHeader);
-	            console.log(resHeader);
-	            __response.writeHead(200, resHeader);
-	            __response.end(data);
-	        });
+	        sendFileToClient(viewRealPath,__response,{"Content-Type":"text/html;charset=utf-8"});
 	    } else {
 	        // 以下代码可以支持 freemarker视图文件，扩展名为config.viewExdName
 	        var _viewRootPrefix = viewpathPrefix + router.controller;
@@ -212,7 +158,7 @@ exports.processPage = function (router, __request, __response) {
 	                    }
 	                });
 	            } else {
-	                exports.responseErr(400, "找不到视图文件", __request, __response);
+	                exports.responseErr(400, "找不到视图文件", __response);
 	                return;
 	            }
 	           
@@ -220,7 +166,7 @@ exports.processPage = function (router, __request, __response) {
 	       
 	    }
     }catch(e){
-    	this.responseErr(500, e.message, __request, __response);
+    	this.responseErr(500, e.message, __response);
     }
 
 };
@@ -235,6 +181,6 @@ exports.processAjax = function (__request,__response,data) {
 	    __response.write(JSON.stringify(data));
 	    __response.end();
     }catch(e){
-    	this.responseErr(500, e.message, __request, __response);
+    	this.responseErr(500, e.message, __response);
     }
 };
