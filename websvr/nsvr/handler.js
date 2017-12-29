@@ -87,28 +87,43 @@ exports.processStatic = function (router, __request, __response) {
 			if(exists){
 				var fileInfo = fs.statSync(filePath);
 		        var lastModified = fileInfo.mtime.toUTCString();
+		     //    s.readFile(filePath, function (err, data) {
+		     //        if (err) {
+		     //            exports.responseErr(404, "not find", __request, __response);
+		     //            return;
+		     //        }
+			    //     var exdName = pathname.substring(pathname.lastIndexOf(".") + 1);
+			    //     console.log(exdName);
+			    //     var date = new Date();
+       //  			date.setTime(date.getTime() + CACHE_TIME * 1000);
+       //              var resHeader = myutil.extend({
+       //                  "Content-Type": config.mime[exdName],
+       //                  "Expires":date.toUTCString(),
+       //                  "Cache-Control":"max-age=" + CACHE_TIME,
+       //                  "Last-Modified":lastModified
 
-		        var err=false;
-	    		var data=fs.readFileSync(filePath);
-		        //fs.readFile(filePath, function (err, data) {
-		            if (err) {
-		                exports.responseErr(404, "not find", __request, __response);
-		                return;
-		            }
-			        var exdName = pathname.substring(pathname.lastIndexOf(".") + 1);
-			        console.log(exdName);
-			        var date = new Date();
-        			date.setTime(date.getTime() + CACHE_TIME * 1000);
-                    var resHeader = myutil.extend({
-                        "Content-Type": config.mime[exdName],
-                        "Expires":date.toUTCString(),
-                        "Cache-Control":"max-age=" + CACHE_TIME,
-                        "Last-Modified":lastModified
+       //              }, commHeader);
+			    //     __response.writeHead(200, resHeader);
+			    //     __response.end(data);
+			    // });
 
-                    }, commHeader);
-			        __response.writeHead(200, resHeader);
-			        __response.end(data);
-			    //});
+			    var stream = fs.createReadStream(filePath,{flags:"r",encoding:null});
+	            stream.on("error", function() {
+	                this.responseErr(500, "服务器错误", __request, __response);
+	            });
+	             var exdName = pathname.substring(pathname.lastIndexOf(".") + 1);
+                 var date = new Date();
+    			date.setTime(date.getTime() + CACHE_TIME * 1000);
+                var resHeader = myutil.extend({
+                    "Content-Type": config.mime[exdName],
+                    "Expires":date.toUTCString(),
+                    "Cache-Control":"max-age=" + CACHE_TIME,
+                    "Last-Modified":lastModified
+
+                }, commHeader);
+		        __response.writeHead(200, resHeader);
+	            //返回文件内容
+	            stream.pipe(__response);
 			}else{
 				this.responseErr(400, "找不到文件", __request, __response);
 			}
