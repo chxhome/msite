@@ -80,23 +80,33 @@ exports.processStatic = function (router, __request, __response) {
 		var pathname = router.pathname;
 	    var filePath = config.docDir + pathname.substring(1);
 	    console.log("静态文件路径：" + filePath);
+		fs.exists(filePath, function(exists){
+			if(exists){
+				var fileInfo = fs.statSync(filePath);
+		        var lastModified = fileInfo.mtime.toUTCString();
+		        fs.readFile(filePath, function (err, data) {
+		            if (err) {
+		                exports.responseErr(404, "not find", __request, __response);
+		                return;
+		            }
+			        var exdName = pathname.substring(pathname.lastIndexOf(".") + 1);
+			        console.log(exdName);
+			        var resHeader = myutil.extend({
+                            "Content-Type": "text/html;charset=utf-8",
+                            "Expires":date.toUTCString(),
+                            "Cache-Control":"max-age=" + CACHE_TIME,
+                            "Last-Modified":lastModified
 
-	    var fileInfo = fs.statSync(filePath);
-        var lastModified = fileInfo.mtime.toUTCString();
-        fs.readFile(filePath,"binary", function (err, data) {
-            if (err) {
-                exports.responseErr(404, "not find", __request, __response);
-                return;
-            }
-	        var exdName = pathname.substring(pathname.lastIndexOf(".") + 1);
-	        console.log(exdName);
-	        var resHeader = myutil.extend({
-	            "Content-Type": config.mime[exdName]//根据扩展名，设置header的输出文件类型
-	        }, commHeader);
-	        __response.writeHead(200, resHeader);
-	        __response.write(data, "binary");
-	        __response.end();
-	    });
+                        }, commHeader);
+			        __response.writeHead(200, resHeader);
+			        __response.end(data);
+			    });
+			}else{
+				this.responseErr(400, "找不到文件", __request, __response);
+			}
+
+		});
+	    
 	}catch(e){
 		this.responseErr(500, e.message, __request, __response);
 	}
