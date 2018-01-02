@@ -68,8 +68,8 @@ exports.addDaily = function (request, response, viewdata) {
         form.parse(request, function (err, fields, files) {
 
             dbdaily.insertDaily({
-                "userId" : 0,
-                "accountId" : 0,
+                "userId" : fields["userId"]||1,
+                "accountId" :fields["accountId"]||1,
                 "createTime" : (new Date()).getTime(),
                 "editTime" : (new Date()).getTime(),
                 "creator" : "admin",
@@ -98,8 +98,8 @@ exports.updateDaily = function (request, response, viewdata) {
         form.parse(request, function (err, fields, files) {
 
             dbdaily.updateDaily(fields["id"],{
-                "userId" : 0,
-                "accountId" : 0,
+                "userId" : fields["userId"]||1,
+                "accountId" : fields["accountId"]||1,
                 "createTime" : (new Date()).getTime(),
                 "editTime" : (new Date()).getTime(),
                 "creator" : "admin",
@@ -132,12 +132,11 @@ exports.importDaily = function (request, response, viewdata) {
         form.parse(request, function (err, fields, files) {
             console.log(err);//fs.renameSync(files.upload.path, fileDir + "/"+fname);
             //fs.renameSync(files.upload.path, fileDir + "/test.jpg");
-        });console.log("importDaily111");
+        });
         
-        form.on("file", function (field, file) {console.log("importDaily222");
+        form.on("file", function (field, file) {
             var filename=fileDir + "/"+fname;
             fs.renameSync(file.path, fileDir + "/"+fname);
-            //response.$redirect('/test/about');
             sheets = xlsx.parse(filename);  
             if(sheets.length){
                 sheet=sheets[0];
