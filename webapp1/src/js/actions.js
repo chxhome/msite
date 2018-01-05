@@ -56,7 +56,7 @@ var _baseActionCreators = {
 
     getDailyList:function(){
         return function(dispatch) {
-             axios.get('/daily/getDailyList')
+             axios.get('/daily/getDailyList/222?aaa=111')
             .then(function (response) {
                 console.log(response);
                 dispatch({

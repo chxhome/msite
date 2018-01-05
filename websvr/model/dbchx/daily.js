@@ -17,8 +17,8 @@ var dailydoc ={
 var collname="daily";
 var dbhelper = require('../../dbdriver/mongodb');
 
-exports.findDaily = function (cb) {
-    dbhelper.findData(collname, {}, {},cb);
+exports.findDaily = function (where,cb) {
+    dbhelper.findData(collname, {}, where,cb);
 };
 
 

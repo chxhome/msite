@@ -28,8 +28,8 @@ var extendResponse = function (response) {
 exports.route = function (request, response) {
     extendResponse(response);
 
-    //console.log(util.inspect(response));
-    var _urlObj = url.parse(request.url);
+    //console.log(util.inspect(_urlObj));
+    var _urlObj = url.parse(request.url);console.log(util.inspect(_urlObj));
     var _pathArr = [];
     var _router = { controller: "home", action: "index", "pathname": _urlObj.pathname };
     if (_urlObj.pathname.length > 1) {
@@ -44,6 +44,15 @@ exports.route = function (request, response) {
                 _router.action=_router.action.substring(0,_router.action.indexOf("."));
             }
         }
+        _router.query={};
+        if(_urlObj.query){
+            var _q=_urlObj.query.split("&");
+            for(var i=0;i<_q.length;i++){
+                var _a=_q[i].split("=");
+                _router.query[_a[0]]=_a[1];
+            }
+        }
+        //弃用代码********
         if (_pathArr.length > 2) {
             //第三个元素开始是参数
             _router.params = {};

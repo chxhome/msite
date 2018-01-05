@@ -4,12 +4,12 @@ var MongoClient = require('mongodb').MongoClient;
 
 /*
 collectioname:集合名，即表名:string
-where：查询条件:{}
 set:指定返回那些字段集合:{}
+where：查询条件:{}
 sortby：排序方式{colname:1升序|-1降序}
 callback：查询完成后的回调函数:function
 */
-exports.findData = function (collectioname, where, set, sortby, callback) {
+exports.findData = function (collectioname, set, where, sortby, callback) {
     if (typeof sortby === "function") {
         callback = sortby;
         sortby = {_id:-1};

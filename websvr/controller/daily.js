@@ -5,7 +5,7 @@ var handler = require("../nsvr/handler");
 var formidable = require("formidable");
 var config = require("../config");
 var myutil = require("../nsvr/myutil");
-
+var util = require("util");
 let splitRowByRN=function(row,cont){
     var arr=[];newrow=[];
     var rows=cont.split("\r\n");
@@ -25,10 +25,18 @@ exports.index = function (request, response, viewdata) {
     return "/index.html";
 };
 
+/*
+*GET
+*/
 exports.getDailyList = function (request, response, viewdata) {
-
+    //console.log(util.inspect(request));
+    console.log(util.inspect(viewdata));
+    if(request.method!="GET"){
+        handler.responseErr(400,"method错误",response);
+        return;
+    }
     try {
-        dbdaily.findDaily(function (result) {
+        dbdaily.findDaily({},function (result) {
             handler.processAjax(request, response, result);
         });
 
@@ -61,9 +69,27 @@ let xlsRow2Param=function(row){
     return param;
 };
 
-exports.addDaily = function (request, response, viewdata) {
+exports.getDaily = function (request, response,viewdata) {
+
+    var id=viewdata.query["id"];
+    if(!id){
+        handler.responseErr(500, "参数错误", request, response);
+        return;
+    }
     try {
-        var params = viewdata.params;
+        dbdaily.findDaily({_id:id},function (result) {
+            var re=(result&&result.length)?result[0]||{}
+            handler.processAjax(request, response, re);
+        });
+
+    } catch (e) {
+        handler.responseErr(500, e.message, request, response);
+    }
+
+};
+
+exports.addDaily = function (request, response) {
+    try {
         var form = new formidable.IncomingForm();
         form.parse(request, function (err, fields, files) {
 
@@ -93,7 +119,6 @@ exports.addDaily = function (request, response, viewdata) {
 
 exports.updateDaily = function (request, response, viewdata) {
     try {
-        var params = viewdata.params;
         var form = new formidable.IncomingForm();
         form.parse(request, function (err, fields, files) {
 
