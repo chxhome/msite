@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+//import {browserHistory} from 'react-router';
 
 import actions from "../../js/actions.js";
 import NoData from "../common/unit/nodata.js";
@@ -14,7 +15,16 @@ class DailyList extends React.Component {
       // add event listeners (Flux Store, WebSocket, document, etc.)
     }
 
-    
+    onToEdit(item){
+      console.log(this.props);
+      window.location="/daily/edit?id="+item._id;
+      //browserHistory.push("/daily/edit?id="+item._id);
+      //this.props.history.push("/daily/edit?id="+item._id);
+      //window.h
+    }
+
+    onToDelete(){}
+
     render() {
       let state=this.props.state;console.log(state);
       //state.loading=true;
@@ -25,11 +35,11 @@ class DailyList extends React.Component {
                           <td>{item.place}</td>
                           <td>{item.persons}</td>
                           <td>{item.money}</td>
-                          <td>{item.content}</td>
+                          <td title={item.content}>{item.content}</td>
                           <td>{dailyEnum.getExpTypeName(item.exptype)}</td>
-                          <td>{item.event}</td>
+                          {/* <td>{item.event}</td> */}
                           <td>{dailyEnum.getImportancesName(item.importance)}</td>
-                          <td>操作</td>
+                          <td><a onClick={this.onToEdit.bind(this,item)}>编辑</a><a onClick={this.onToDelete.bind(this)}>删除</a></td>
                         </tr>
                       )
                     },this);
@@ -45,7 +55,7 @@ class DailyList extends React.Component {
            <div className="m-table">
               <NoData nodata={state.list.length<=0}/>
               <Loading loading={state.loading}/>
-              <table class="m-table">
+              <table className="m-table">
                   <thead>
                     <tr>
                       <td>时间</td>
@@ -54,7 +64,7 @@ class DailyList extends React.Component {
                       <td>金额</td>
                       <td>内容</td>
                       <td>类型</td>
-                      <td>事件</td>
+                      {/* <td>事件</td> */}
                       <td>重要性</td>
                       <td>操作</td>
                     </tr>

@@ -24,12 +24,19 @@ let splitRowByRN=function(row,cont){
 exports.index = function (request, response, viewdata) {
     return "/index.html";
 };
+exports.list = function (request, response, viewdata) {
+    return "/index.html";
+};
+exports.edit = function (request, response, viewdata) {
+    return "/index.html";
+};
 
 /*
 *GET
 */
 exports.getDailyList = function (request, response, viewdata) {
     //console.log(util.inspect(request));
+    console.log(111111);
     console.log(util.inspect(viewdata));
     if(request.method!="GET"){
         handler.responseErr(400,"method错误",response);
@@ -70,15 +77,19 @@ let xlsRow2Param=function(row){
 };
 
 exports.getDaily = function (request, response,viewdata) {
-
+    console.log("controller");
+    console.log(util.inspect(viewdata));
     var id=viewdata.query["id"];
     if(!id){
         handler.responseErr(500, "参数错误", request, response);
         return;
     }
     try {
-        dbdaily.findDaily({_id:id},function (result) {
-            var re=(result&&result.length)?result[0]||{}
+        dbdaily.findDaily({_id:+id},function (result) { console.log(result);
+            var re=result||{};
+            if(re.data&&re.data.length){
+                re.data=re.data[0];
+            }
             handler.processAjax(request, response, re);
         });
 
@@ -122,7 +133,7 @@ exports.updateDaily = function (request, response, viewdata) {
         var form = new formidable.IncomingForm();
         form.parse(request, function (err, fields, files) {
 
-            dbdaily.updateDaily(fields["id"],{
+            dbdaily.updateDaily(+fields["_id"],{
                 "userId" : fields["userId"]||1,
                 "accountId" : fields["accountId"]||1,
                 "createTime" : (new Date()).getTime(),

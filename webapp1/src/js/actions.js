@@ -19,7 +19,7 @@ var _baseActionCreators = {
     //no-reducer
     saveDaily:function(data,cb){
         var url="/daily/addDaily";
-        if(data.id){
+        if(data._id){
             url='/daily/updateDaily';
         }
         //return function(dispatch) {
@@ -56,11 +56,27 @@ var _baseActionCreators = {
 
     getDailyList:function(){
         return function(dispatch) {
-             axios.get('/daily/getDailyList/222?aaa=111')
+             axios.get('/daily/getDailyList')
             .then(function (response) {
                 console.log(response);
                 dispatch({
                     type: 'GetDailyList',
+                    data: response.data
+                });
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+
+        }
+    },
+    getDaily:function(id){
+        return function(dispatch) {
+             axios.get('/daily/getDaily?id='+id)
+            .then(function (response) {
+                console.log(response);
+                dispatch({
+                    type: 'GetDaily',
                     data: response.data
                 });
             })

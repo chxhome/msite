@@ -8,8 +8,10 @@ class TextArea extends React.Component {
     }
 
     onTextChange(event){
-      this.state.value=event.target.value;
-
+      this._beginChg=true;
+      this.setState({
+        value:event.target.value//.toUpperCase()
+      });
       if(this.props["on-change"]){
         this.props["on-change"](event.target.value);
       }
@@ -21,9 +23,13 @@ class TextArea extends React.Component {
     }
 
     render() {
+      if(!this._beginChg){
+        this.state.value=this.props.value;
+      }
+     
         return (
            <div className="u-textarea">
-             <textarea cols="50" rows="6" onChange={this.onTextChange.bind(this)} defaultValue={this.props.value} className="u-ipt u-ipt-text"></textarea>
+             <textarea cols="50" rows="6" onChange={this.onTextChange.bind(this)} value={this.state.value} className="u-ipt u-ipt-text"></textarea>
           </div>
         );
      

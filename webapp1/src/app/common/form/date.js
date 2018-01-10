@@ -3,6 +3,11 @@ class _Date extends React.Component {
     constructor(props) {
       super(props);
       var val=this.props.value||new Date();
+      var obj=this._getDateValue(val);
+      this.state={dvalue:obj.value,value:obj};
+    }
+
+    _getDateValue(val){
       var _value={};
       if(typeof val=="number"){
         val=new Date(val);
@@ -10,15 +15,16 @@ class _Date extends React.Component {
       _value={
         valueNumber:val.getTime(),
         valueDate:val
-      }
+      };
       if(typeof val!="string"){
         val=val._toString("yyyy-MM-dd");
       }
       _value.value=val;
-      this.state={dvalue:val,value:_value};
+      return _value;
     }
 
     onchange(event){
+      this._beginChg=true;
        console.dir(event.target);
        var obj={
             value:event.target.value,
@@ -37,8 +43,13 @@ class _Date extends React.Component {
     getValue(){
       return this.state.value;
     }
-    render() {
-        
+    render() {//console.log(this.props.value);console.log("111111111111111111111111111111");
+       // this.state.dvalue=this.props.value;
+       if(!this._beginChg){
+        var obj=this._getDateValue(this.props.value);
+        this.state.dvalue=obj.value;
+        this.state.value=obj;console.log(this.state);console.log("222222222222222");console.log(obj);
+       }
         return (
            <div className="u-input">
              <input className="u-ipt u-ipt-date" type="date" value={this.state.dvalue} onChange={this.onchange.bind(this)}/>

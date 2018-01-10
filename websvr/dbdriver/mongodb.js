@@ -23,6 +23,7 @@ exports.findData = function (collectioname, set, where, sortby, callback) {
         }
         //获得指定的集合 
         var collection = db.collection(collectioname);
+        console.log("mongodb driver find(",where,",",set,")");
         collection.find(where, set).sort(sortby).toArray(function (err, result) {
             db.close();
             //如果存在错误
@@ -31,6 +32,7 @@ exports.findData = function (collectioname, set, where, sortby, callback) {
                 callback({ code: 500, msg: err.toString() });
                 return;
             }
+            console.log("mongodb driver result:",result);
             //调用传入的回调方法，将操作结果返回
             callback({ code: 200, data: result});
         });
@@ -118,9 +120,9 @@ exports.updateData = function (collectioname, where, updatedata, callback) {
         //更新数据
         //var where = { "id": 111 };
         //data={name:"aaaaaaaa",id:111,age:12}
-        for (var k in data) {
+        for (var k in updatedata) {
             if (where[k.toString()]) {
-                delete data[k.toString()];//删除包含在条件对象里的字段
+                delete updatedata[k.toString()];//删除包含在条件对象里的字段
             }
         }
         collection.update(where, {$set: updatedata}, function (err, result) {

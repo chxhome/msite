@@ -6,7 +6,10 @@ class SelectHtml extends React.Component {
     }
 
     onSelectChange(event){
-
+      this._beginChg=true;
+      this.setState({
+        value:event.target.value//.toUpperCase()
+     });
       if(this.props["on-change"]){
          this.props["on-change"]({
            value:event.target.value,
@@ -16,6 +19,9 @@ class SelectHtml extends React.Component {
       
     }
 
+    getValue(){
+      return this.state.value;
+    }
 
     render() {
         var dd=this.props.uiData||this.state.uiData;
@@ -23,10 +29,12 @@ class SelectHtml extends React.Component {
         for(var i=0;i<dd.length;i++){
             opts.push(<option value={dd[i].value}>{dd[i].text}</option>);
         }
-
+        if(!this._beginChg){
+          this.state.value=this.props.value;
+        }
         return (
            <div className="u-select">
-             <select onChange={this.onSelectChange.bind(this)} defaultValue={this.props.value} className="u-ipt u-ipt-select">
+             <select onChange={this.onSelectChange.bind(this)} value={this.state.value} className="u-ipt u-ipt-select">
                {opts}
             </select>
           </div>

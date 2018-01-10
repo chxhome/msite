@@ -100,13 +100,13 @@ exports.responseErr = function (code, msg, __response) {
 //处理动态页面请求
 exports.processPage = function (router, __request, __response) {
 	try{
-		console.log("processPage");
+		console.log("processPage"); console.log(router);
 	    var controller = getController(router);
 	    if (!controller) {
 	        this.responseErr(500, "获取控制器失败", __response);
 	        return;
 	    }
-	    var viewdata = myutil.extend({}, { params: router.params });
+	    var viewdata = myutil.extend({}, { params: router.params||{},query:router.query||{} });
 	    var action = router["action"] || router["controller"];//如果没有ACTION，controller作为action名，这样可以实现根目录页面访问地址。
 	
 	    var actionFn = controller[action];
@@ -114,10 +114,10 @@ exports.processPage = function (router, __request, __response) {
 	        this.responseErr(404, "获取页面失败", __response);
 	        return;
 	    }
-	    var _viewPath = actionFn(__request, __response, viewdata);
+	    var _viewPath = actionFn(__request, __response, viewdata);//执行ACTION，没有返回视图文件，表示异步请求，在ACTION方法里输出json对象
 	    if (!_viewPath) {
 	       // __response.end();
-	        return;//未指定视图文件，有可能是异步请求
+	        return;//未指定视图文件，认为是异步请求
 	    }
 	    //当用户在action方法里直接返回带.html扩展名的文件时，不作为freemarker模板文件解析,直接输出静态文件
 	    if (_viewPath.indexOf(".html") > 1) {
@@ -162,7 +162,7 @@ exports.processPage = function (router, __request, __response) {
 	                return;
 	            }
 	           
-	        })
+	        });
 	       
 	    }
     }catch(e){

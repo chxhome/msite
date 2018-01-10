@@ -41,6 +41,13 @@ var _user=function (state = {}, action) {
                 _state.list=dd.data;
                 _state.loading=false;
                 return _state;
+            case "GetDaily":
+                var _state = Object.assign({}, state);
+                var dd=action.data;console.log(dd);
+                _state.daily=dd.data;
+                _state.loading=false;
+                return _state;
+                
             default:
                 return state;
         }

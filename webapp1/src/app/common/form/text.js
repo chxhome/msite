@@ -10,6 +10,7 @@ class Text extends React.Component {
 
 
     onInputChange(event){
+      this._beginChg=true;
       this.setState({
          value:event.target.value//.toUpperCase()
       });
@@ -23,6 +24,9 @@ class Text extends React.Component {
       return this.state.value;
     }
     render() {
+        if(!this._beginChg){
+          this.state.value=this.props.value;
+        }
         return (
            <div className="u-input">
              <input type="text" onChange={this.onInputChange.bind(this)} value={this.state.value} className="u-ipt"/>

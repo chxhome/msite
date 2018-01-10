@@ -18,6 +18,7 @@ var collname="daily";
 var dbhelper = require('../../dbdriver/mongodb');
 
 exports.findDaily = function (where,cb) {
+    console.log("model findDaily:",where);
     dbhelper.findData(collname, {}, where,cb);
 };
 

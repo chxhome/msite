@@ -9,7 +9,7 @@ var _initstate = {
         user:{
         	list:[],name:"chx",realname:"xuxu"
         },
-        daily:{list:[],loading:true}
+        daily:{list:[],loading:true,daily:{}}
     };
 
     var thunkMiddleware = function(_ref) {

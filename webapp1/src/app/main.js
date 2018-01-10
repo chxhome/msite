@@ -5,7 +5,7 @@ import {render} from 'react-dom';
 import _exdbase from "../js/extend/base";
 import App from "./root/root";
 import {BrowserRouter,HashRouter,hashHistory} from 'react-router-dom';
-
+var sss={a:1};
 // const render = (Component) => {
 //     ReactDOM.render(
 //         <AppContainer>
@@ -17,9 +17,9 @@ import {BrowserRouter,HashRouter,hashHistory} from 'react-router-dom';
 //render(App);
 
 render(
-        (<HashRouter history={hashHistory}>
-        	<App/>
-		  </HashRouter>),
+        (<BrowserRouter>
+        	<App history={sss}/>
+		  </BrowserRouter>),
         document.getElementById('app')
     );
 
