@@ -1,0 +1,84 @@
+body{
+  background-color: #ddd;
+  color:#009;
+}
+#tupian{
+  background-image: url(../images/manhua.jpg);
+  width: 400px;height:400px;
+  transform: rotate(45deg);
+  box-shadow: 1px 1px 2px 1px #009;
+}
+p{
+  background-color: #ddd;
+  color:#009;
+}
+a{
+  background-color: #ddd;
+  color:#009;
+}
+b{
+  background-color: #ddd;
+  color:#009;
+}
+div{
+  background-color: #ddd;
+  color:#009;
+}
+h1{
+  background-color: #ddd;
+  color:#009;
+}
+h2{
+  background-color: #ddd;
+  color:#009;
+}
+h3{
+  background-color: #ddd;
+  color:#009;
+}
+h4{
+  background-color: #ddd;
+  color:#009;
+}
+h5{
+  background-color: #ddd;
+  color:#009;
+}
+h6{
+  background-color: #ddd;
+  color:#009;
+}
+
+.cssicon{display:inline-block;font-size:0;}
+.cssicon span{display:inline-block;position: relative;}
+/* 
+.cssicon-del{width:10px;opacity:0.5;zoom:1.2;}
+.cssicon-del:after,.cssicon-del:before,.cssicon-del span{content:"";display:inline-block;position: relative;background-color: #333;}
+
+.cssicon-del:before{height:2px;width:4px;left:3px;border-radius: 1px 1px;}
+.cssicon-del span{width:10px;height:2px;border-radius: 1px 1px;}
+.cssicon-del:after{height:8px;width:8px;left:1px;top:1px;border-radius: 1px 1px;margin:0;}
+
+.cssicon-del:hover{opacity: 0.9;} */
+
+/* .cssicon-edit{height:16px; opacity: 0.5;}
+.cssicon-edit span{width:6px;height:20px;transform: rotate(45deg);left:4px;}
+.cssicon-edit span:before{display:inline-block;content:"";width:5px;height:12px;background-color: #333;}
+.cssicon-edit span:after{
+  content:"";display:inline-block;
+  width: 1px;
+  height: 0;
+  border-width: 6px 2px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+.cssicon-edit:after{
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 0;
+  border-width: 3px 3px;
+  border-style: solid;
+  border-color: transparent transparent #333 transparent;position: relative;top:-8px;
+}
+.cssicon-edit:hover{opacity: 0.9;} */

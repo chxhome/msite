@@ -1,0 +1,80 @@
+$iconColor:#333;
+.cssicon{
+  display:inline-block;font-size:0;opacity: 0.5;
+  span{display:inline-block;position: relative;}
+  &:hover{opacity: 0.9;}
+}
+.cssicon-del{
+  width:12px;opacity:0.5;zoom:1;text-align:center;
+  &:before{
+    content:"";display:inline-block;position: relative;background-color:$iconColor;
+    height:3px;width:6px;border-radius: 1px 1px;margin:0 auto;
+  }
+   span{display:inline-block;position: relative;background-color: $iconColor;width:12px;height:3px;border-radius: 1px 1px;}
+  &:after{
+    content:"";display:inline-block;position: relative;background-color:$iconColor;
+    height:9px;width:10px;top:1px;border-radius: 1px 1px;margin:0 auto;
+  }
+}
+
+.cssicon-edit{
+  height:16px; opacity: 0.5;zoom:1;
+  span{
+    width:6px;height:20px;transform: rotate(45deg);left:4px;
+    &:before{display:inline-block;content:"";width:5px;height:12px;background-color: $iconColor;}
+    &:after{
+      content:"";display:inline-block;
+      width: 1px;
+      height: 0;
+      border-width: 6px 2px;
+      border-style: solid;
+      border-color: $iconColor transparent transparent transparent;
+    }
+  }
+  &:after{
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 0;
+    border-width: 3px 3px;
+    border-style: solid;
+    border-color: transparent transparent $iconColor transparent;position: relative;top:-8px;
+  }
+}
+
+.cssicon-up{
+  width: 0;
+  height: 0;
+  border-width: 0 6px 10px 6px;
+  border-style: solid;
+  border-color: transparent transparent $iconColor transparent;
+}
+.cssicon-down{
+  width: 0;
+  height: 0;
+  border-width: 10px 6px 0 6px;
+  border-style: solid;
+  border-color: $iconColor transparent transparent transparent;
+}
+
+.cssicon-left{
+  width: 0;
+  height: 0;
+  border-width: 6px 10px 6px 0;
+  border-style: solid;
+  border-color: transparent $iconColor transparent transparent;
+}
+.cssicon-right{
+  width: 0;
+  height: 0;
+  border-width: 6px 0 6px 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent $iconColor;
+}
+.cssicon-head{
+  width:16px;text-align:center;overflow: hidden;height: 16px;
+  &:before{content:"";border:solid 4px #333;border-radius: 50% 50%;margin:0 auto;position: relative;top:4px;}
+  &:after{content:"";border:solid 7px #333;border-radius: 5px;position: relative;bottom:-17px;}
+}
+
+
