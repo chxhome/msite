@@ -27,7 +27,7 @@ class SelectHtml extends React.Component {
         var dd=this.props.uiData||this.state.uiData;
         var opts=[];
         for(var i=0;i<dd.length;i++){
-            opts.push(<option value={dd[i].value}>{dd[i].text}</option>);
+            opts.push(<option key={i} value={dd[i].value}>{dd[i].text}</option>);
         }
         if(!this._beginChg){
           this.state.value=this.props.value;

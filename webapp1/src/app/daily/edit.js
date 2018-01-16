@@ -77,17 +77,14 @@ class DailyEdit extends React.Component {
     fd.place=this.refs.place.getValue();
 		//fd.event=this.refs.event.getValue();
 		fd.money=this.refs.money.getValue();
-		console.log(fd);
 		actions.saveDaily(fd,function(){
-			window.location.href="/daily/list";
-			//browserHistory.push("/daily/list");
-			//this.context.router.push("/daily/list");
-			//this.props.history.push("/daily/list");
+			window.rHistory.push("/daily/list");
 		}.bind(this));
  	}
 
   render() {
-		//var state=this.state||{};console.log(this.props.state);
+		//var state=this.state||{};
+		console.log(this.props);
 		this.state=this.props.state;//console.log(state);
 		if(!this.state.daily._id){
 			 util.extend(this.state.daily,this._state.formDD,true);
@@ -156,8 +153,8 @@ class DailyEdit extends React.Component {
 			actions.getDaily(urlObj.id);
 		}
 	 		 
-  }
-  
+	}
+	
 }
 
 export default DailyEdit;

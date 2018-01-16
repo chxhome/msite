@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-//import {browserHistory} from 'react-router';
 
 import actions from "../../js/actions.js";
 import NoData from "../common/unit/nodata.js";
@@ -16,11 +15,12 @@ class DailyList extends React.Component {
     }
 
     onToEdit(item){
-      console.log(this.props);
-      window.location="/daily/edit?id="+item._id;
-      //browserHistory.push("/daily/edit?id="+item._id);
-      //this.props.history.push("/daily/edit?id="+item._id);
-      //window.h
+
+      if(item){
+        window.rHistory.push("/daily/edit?id="+item._id);
+      }else{
+        window.rHistory.push("/daily/edit");
+      }
     }
 
     onToDelete(){}
@@ -30,7 +30,7 @@ class DailyList extends React.Component {
       //state.loading=true;
       let _list=state.list.map((item) => {
                       return (
-                        <tr>
+                        <tr key={item._id}>
                           <td>{util.timeFormat(item.time,"yyyy-MM-dd")}</td>
                           <td>{item.place}</td>
                           <td>{item.persons}</td>
@@ -79,8 +79,6 @@ class DailyList extends React.Component {
     }
 
     componentDidMount () {
-        // React.getDOMNode()
-       
         actions.getDailyList();
     }
   

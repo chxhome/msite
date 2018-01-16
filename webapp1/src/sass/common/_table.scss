@@ -1,0 +1,81 @@
+/**
+ * =====================================================
+ * description: 列表表格基础模块
+ * list:
+ * =====================================================
+ */
+.m-table{table-layout:fixed;width:100%;}
+.m-table th{padding: 14px 10px;}
+.m-table th,.m-table td{padding: 14px 10px; padding-right: 0;}
+.m-table tr{border:1px solid transparent;}
+.m-table thead{background-color: #eef;}
+.m-table th{font-weight:bold;font-size: 14px;}
+.m-table td{font-size: 12px;}
+.m-table caption {padding: 10px; border-bottom: 0; border-radius: 3px 3px 0 0;}
+.m-table tbody tr:hover{background-color:$bgColor-light;}
+.m-table td{
+    $ellipsis();
+    .u-icon-edit{
+        margin-right: 20px;
+    }
+    .u-icon-admin,.u-icon-superadmin,.u-icon-kefu,.u-icon-outerkefu,.u-icon-empty{
+        margin-right: 4px;
+    }
+    .u-icon-online,.u-icon-offline,.u-icon-kefupending{
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        $border-radius:50%;
+        margin-right: 8px;
+    }
+    .u-icon-kefu{
+        background:transparent !important;
+    }
+    .u-icon-disabled{
+        transform:translate(-1px,2px);
+    }
+    .u-icon-okmini{
+        transform:translate(-2px,4px);
+    }
+    .u-icon-empty{
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+    }
+    a{
+
+    }
+    .m-tips{
+        display: inline-block;
+    }
+    .time{
+        display: inline-block;
+        min-width: 48px;
+    }
+    .u-icon-usergroup{
+        transform: translateY(4px);
+        margin-right: 4px;
+    }
+    .delete{
+        cursor: pointer;
+    }
+}
+.m-table thead td{
+    font-weight:bold;
+    .sort{
+        display: inline-block;
+        height: 15px;
+        padding: 2px 0 0 4px;
+        vertical-align: middle;
+        width: 8px;
+    }
+    .u-icon-triangleup,.u-icon-triangledown{
+        display: block;
+    }
+    .u-icon-triangleup{
+        margin-bottom: 2px;
+    }
+    .z-triangleup-active,.z-triangledown-active{
+        background-position-x: -60px !important;
+    }
+}

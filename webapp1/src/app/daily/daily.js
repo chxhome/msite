@@ -9,7 +9,7 @@ class Daily extends React.Component {
   }
 
   render() {
-	    var state=this.props.state;console.log(state);
+	    var state=this.props.state;
 	    return (
 		       <div className="m-daily">
 		       		<div className="m-title"><h1>日常管理</h1></div>

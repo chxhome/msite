@@ -1,0 +1,7 @@
+.m-form{
+    dl{padding:10px;}
+    dt{$inline-block();min-height:30px;width:180px;}
+    dd{$inline-block();min-height:30px;
+        .inp{height:30px;width:200px;outline:solid 1px #999;}
+    }
+}

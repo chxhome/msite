@@ -1,33 +1,17 @@
-﻿import React from 'react';
-import {render} from 'react-dom';
-//import { AppContainer } from 'react-hot-loader';
-//import { Provider } from 'react-redux';
-import _exdbase from "../js/extend/base";
-import App from "./root/root";
-import {BrowserRouter,HashRouter,hashHistory} from 'react-router-dom';
-var sss={a:1};
-// const render = (Component) => {
-//     ReactDOM.render(
-//         <AppContainer>
-//             <Component />
-//         </AppContainer>,
-//         document.getElementById('app')
-//     )
-// };
-//render(App);
+﻿import appcss from "../css/app.css";
+import appsass from "../sass/nav.scss";
 
-render(
-        (<BrowserRouter>
-        	<App history={sss}/>
-		  </BrowserRouter>),
+import _exdbase from "../js/extend/base";
+import React from 'react';
+import ReactDom from 'react-dom';
+import {BrowserRouter as Router,HashRouter} from 'react-router-dom';
+
+import App from "./root/root";
+
+ReactDom.render(
+        (<Router>
+        	<App/>
+		  </Router>),
         document.getElementById('app')
     );
 
-// if (module.hot) {
-//     module.hot.accept('./root/root', () => {
-//     	window.setTimeout(function(){
-//     		 render(App);
-//     	},1000);
-       
-//     });
-// }

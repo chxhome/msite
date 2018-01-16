@@ -26,10 +26,6 @@ class Logo extends React.Component {
      actions.setLogoImgUrl("https://nos.netease.com/ysf/5EA75194B455B543DA917A35029A4F04");console.log(React);
   }
 
-  // static defaultProps = {
-  //   imgUrl:'imgUrl'
-  // }
-
   // static propTypes={
   //   //imgUrl:React.PropTypes.string
   // }

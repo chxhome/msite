@@ -1,6 +1,5 @@
 ﻿import React from 'react';
 import store from "../../js/store.js";
-//import { connect } from 'react-redux';
 import Logo from "../logo/logo.js";
 import Nav from "../nav/nav.js";
 import actions from "../../js/actions.js";
@@ -8,7 +7,7 @@ import {Switch,Route} from 'react-router-dom';
 
 import Home from "../home/home";
 import Daily from "../daily/daily";
-
+import {withRouter} from "react-router-dom";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -68,7 +67,8 @@ class App extends React.Component {
 
   componentDidMount () {
     // React.getDOMNode()
-    actions.setTitle("ddddddd333333333dddddd");
+    actions.setTitle("ddddddd333333333dddddd");console.log(this.props.history);
+    window.rHistory=this.props.history;
   }
 
   componentWillReceiveProps(nextProps){
@@ -90,4 +90,4 @@ class App extends React.Component {
 
 }
 
-export default App;
+export default withRouter(App);
