@@ -67,7 +67,7 @@ class App extends React.Component {
 
   componentDidMount () {
     // React.getDOMNode()
-    actions.setTitle("ddddddd333333333dddddd");console.log(this.props.history);
+    actions.setTitle("dddddddddd");console.log(this.props.history);
     window.rHistory=this.props.history;
   }
 

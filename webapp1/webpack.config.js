@@ -9,18 +9,22 @@ const CopyPlugin=require("copy-webpack-plugin");
 module.exports = {
     //context: __dirname,
     devtool: "cheap-eval-source-map",
-    entry: [
+    entry: {
         //'webpack-dev-server/client?http://127.0.0.1:8080',//资源服务器地址
         //'react-hot-loader/patch',
         //'webpack/hot/only-dev-server.js',
-        path.join(__dirname, '/src/app/main.js')
-    ],
+        "bundle":path.join(__dirname, '/src/app/main.js'),
+        "react":["react","react-dom"]
+    },
     output: {
         path: path.join(__dirname, '/build'),
-        filename: "bundle.js",
+        filename: "[name].js",
         publicPath: '/build/'
     },
-    
+    // externals: {
+    //     "react": 'react',
+    //     'react-dom': 'ReactDOM'
+    // },
     module: {
         rules: [
             {
@@ -51,6 +55,7 @@ module.exports = {
                     loader:"url-loader",//处理CSS里的图片,图片大小小于下面的limit打包成base64,否则会以hash值命名图片并复制到dist，已自带file-loader,用于处理CSS里的设置的图片路径与打包后图片路径不一致问题
                     options:{
                       limit:256,
+                      name:"[name].[ext]",//不设置或设置为"[name].[hash].[ext]"用HASH命名，一般不希望
                       outputPath:"images/"
                     }
                   }]
@@ -60,6 +65,7 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         //new UglifyPlugin(),//开发环境下 运行wevpack-dev-server时，不能引入此插件
+        new webpack.optimize.ModuleConcatenationPlugin(),
         new ExtractTextPlugin("css/index.css"),//页面上引入的打包后的CSS文件，入口JS文件里import的不同CSS或LESS文件都会打包在这里，打包后目录是：publicPath+这里的目录
         new HtmlPlugin({
             minify:{removeAttributeQuotes:true},//去掉HTML里的引号
@@ -70,6 +76,14 @@ module.exports = {
             from:__dirname+"/src/res",
             to:"./res"//默认相对于dist
         }]),
+        // new webpack.ProvidePlugin({
+        //     $:"jquery"
+        // }),//用于分离打包第三方库
+        new webpack.optimize.CommonsChunkPlugin({
+                name: 'react', 
+                filename: 'react.bundle.js' ,
+                hash:false
+        }),//分离打包react和react-dom 需要和entry配置配合,有个问题是，尾部跟着hash，每次访问需要下载，这时个问题。可能需要借助gulp处理
         new webpack.BannerPlugin('chxsite')//打包后的版权声明
     ],
     
@@ -85,7 +99,7 @@ module.exports = {
         // hot:true,
         // publicPath: '/',
 
-        compress:true,
+        compress:true
      },
 
 };

@@ -14,52 +14,45 @@ const iconfont = require('gulp-iconfont');//将多个SVG文件合并生成不同
 const iconfontCss = require('gulp-iconfont-css');//将多个SVG文件生成字体样式代码
 const imagemin = require('gulp-imagemin');//npm install --save-dev gulp-imagemin
 const spritesmith = require('gulp.spritesmith');//根据某目录下的多张图标生成一个雪碧图。npm install --save-dev gulp-spritesmith
+const replace = require('gulp-replace');
 
+
+gulp.task('del-react-js-hash', function() {
+	
+});
 
 gulp.task('build-c', [], () => {
     const config = require('./webpack.config.js');
     const compiler = webpack(config,function(err,stats){
-       
+        gulp.src('./build/index.html')
+		.pipe(replace(/react\.bundle\.js\?\w+/g, 'react.bundle.js'))
+		.pipe(gulp.dest('./build'));
     });
-    
 });
 
 gulp.task('build', ['build-c'], () => {
-     gulp.watch(['./src/app/**/*.js','./src/js/**/*.js'],['build-c']);
+     gulp.watch(['./src/app/**/*.js','./src/js/**/*.js','./src/sass/**/*.scss'],['build-c']);
     
 });
 
-gulp.task('websvr', ['mcss','build'], () => {
+gulp.task('websvr', () => {
     const config = require('./webpack.config.js');
     const compiler = webpack(config,function(err,stats){
-
+        if(err){return;}
+        gulp.watch(['./src/app/**/*.js','./src/js/**/*.js'],['build-c']);
+        const server = new WebpackDevServer(compiler, {
+            //contentBase: './',
+            //hot: true,
+            //filename: 'bundle.js',
+            //publicPath: '/'
+        });
+        server.listen(8080, 'localhost', function () { 
+    
+        });
     });
-    const server = new WebpackDevServer(compiler, {
-        contentBase: './',
-        //hot: true,
-        //filename: 'bundle.js',
-        //publicPath: '/',
-        //stats: {
-        //    colors: true,
-        //},
-    });
-    server.listen(8080, 'localhost', function () { 
-        for(var a in server){
-            //console.log(a.toString());
-        }
-    });
+   
 });
 
-let mcssSrc = ['./src/mcss/**/*.mcss', '!./src/mcss/**/_*.mcss'];
-gulp.task('mcss:compile', () => {
-    return gulp.src(mcssSrc)
-        .pipe(mcss())
-        .pipe(gulp.dest('./src/css/'));
-});
-
-gulp.task('mcss', ['mcss:compile'], () => {
-    gulp.watch(mcssSrc[0], ['mcss:compile']);
-});
 
 //把某个目录下的SVG图片生成一个字体图标文件，并生成CSS代码
 //targetPath不能用相对路径，因为path里含src与targetPath也喊src会出现奇怪的路径定位错误，所以改为绝对路径
@@ -174,4 +167,15 @@ gulp.task('sprite', function () {
     });
 
     return merge(tasks);
+});
+
+let mcssSrc = ['./src/mcss/**/*.mcss', '!./src/mcss/**/_*.mcss'];
+gulp.task('mcss-c', () => {
+    return gulp.src(mcssSrc)
+        .pipe(mcss())
+        .pipe(gulp.dest('./src/css/'));
+});
+
+gulp.task('mcss', ['mcss-c'], () => {
+    gulp.watch(mcssSrc[0], ['mcss-c']);
 });
