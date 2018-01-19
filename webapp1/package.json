@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "index",
+    "gulp-build": "gulp build",
     "build": "webpack",
     "server": "webpack-dev-server --open",
     "sass":"sass ./src/sass/test.scss ./src/sass/test.css",
