@@ -21,7 +21,7 @@ gulp.task('del-react-js-hash', function() {
 	
 });
 
-gulp.task('build-c', [], () => {
+gulp.task('build', [], () => {
     const config = require('./webpack.config.js');
     const compiler = webpack(config,function(err,stats){
         gulp.src('./build/index.html')
@@ -30,7 +30,7 @@ gulp.task('build-c', [], () => {
     });
 });
 
-gulp.task('build', ['build-c'], () => {
+gulp.task('build-dev', ['build'], () => {
      gulp.watch(['./src/app/**/*.js','./src/js/**/*.js','./src/sass/**/*.scss'],['build-c']);
     
 });

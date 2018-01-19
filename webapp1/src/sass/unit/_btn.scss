@@ -3,7 +3,7 @@
  * author:      hzfangbo@corp.netease.com;
  */
 
-$u-btn = {
+ @mixin u-btn {
 	display: inline-block;
 	padding:10px 24px;
 	font-size: 12px;
@@ -21,7 +21,7 @@ $u-btn = {
 	}
 }
 
-$u-btn-style = {
+@mixin u-btn-style  {
 	display: inline-block;
 	padding:10px 24px;
 	font-size: 12px;
@@ -56,7 +56,7 @@ $u-btn-style = {
 }
 
 .u-btn-disabled{
-	$u-btn-style();
+	@include u-btn-style;
 	cursor: default;
 	color:#fff;
 	background-color: #bcd8f1;
@@ -70,30 +70,30 @@ $u-btn-style = {
 
 
 .u-btn-xxl{
-	$u-btn-style();
+	@include u-btn-style;
 	padding:20px 60px;
 }
 .u-btn-xl{
-	$u-btn();
+	@include u-btn;
 	padding:12px 48px;
 
 }
 .u-btn-l{
-	$u-btn();
+	@include u-btn;
 	padding:8px 28px;
 }
 
 .u-btn-sm{
-	$u-btn();
+	@include u-btn;
 	padding:8px 10px;
 }
 .u-btn-ssm{
-	$u-btn();
+	@include u-btn;
 	padding: 4px 16px;
 }
 
 .u-btn-cancel{
-	$u-btn();
+	@include u-btn;
   	margin-left: 7px;
 	color:#76838f;
 	background-color: #e4eaec;
@@ -105,7 +105,7 @@ $u-btn-style = {
 	}
 }
 .u-btn-cancel-disabled{
-	$u-btn-style();
+	@include u-btn-style;
 	cursor: default;
 	color:#fff;
 	background-color: #ccd5db;
@@ -119,7 +119,7 @@ $u-btn-style = {
 	}
 }
 .u-btn-delete{
-	$u-btn();
+	@include u-btn;
 	color:#fff;
 	background-color: #f96868;
 	&:hover{
@@ -130,7 +130,7 @@ $u-btn-style = {
 	}
 }
 .u-btn-delete-disabled{
-	$u-btn-style();
+	@include u-btn-style;
 	cursor: default;
 	color:#fff;
 	background-color: #fab4b4;
@@ -163,7 +163,7 @@ $u-btn-style = {
 	}
 }
 .u-btn-save{
-	$u-btn-style();
+	@include u-btn-style;
 	background-color:#fff;
 	color:#62a8ea;
 	border: 1px solid #a2caee;
@@ -177,7 +177,7 @@ $u-btn-style = {
 	}
 }
 .u-btn-save-disabled{
-	$u-btn-style();
+	@include u-btn-style;
 	cursor: default;
 	color:#bcd8f1;
 	border: 1px solid #ccd5d8;
@@ -195,7 +195,7 @@ $u-btn-style = {
 	}
 }
 .u-btn-cancel-setting{
-	$u-btn-style();
+	@include u-btn-style;
 	background-color:#fff;
 	color:#76838f;
 	border: 1px solid #dadfe0;

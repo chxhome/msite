@@ -1,10 +1,10 @@
 .u-crumbs{
 	padding:5px 0 10px;position: relative;border-bottom:solid 1px #bbb;margin-bottom:10px;
-	dt{$inline-block();font-wieght:bold;color:#333;
+	dt{@include inline-block;font-weight:bold;color:#333;
 
 	}
 	dd{
-		$inline-block();color:#666;
+		@include inline-block;color:#666;
 		a{color:$color-link;}
 
 		&.right{

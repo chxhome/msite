@@ -20,7 +20,7 @@ body,textarea,input,button,select,keygen,legend{font:$fs0/1.14 $ff-yahei;outline
 body{cursor:default;}
 input::-ms-clear,input::-ms-reveal{display:none;}
 button{border:0}
-input{$border-radius:2px;}
+input{border-radius:2px;}
 
 /* 全局样式 */
 a{

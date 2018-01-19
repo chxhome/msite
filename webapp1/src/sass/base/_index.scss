@@ -2,20 +2,20 @@
  * description: 配置
  * author:      hzfangbo@corp.netease.com;
  */
-@import "./_config.mcss";
+@import "./_config";
 /**
  * description: 浏览器适配前缀配置
  * author:      hzfangbo@corp.netease.com;
  */
-@import "./_prefix.mcss";
+//@import "./_prefix";
 /**
  * description: NEC 基础配置
  * author:      hzfangbo@corp.netease.com;
  */
 
-@import "./_base.mcss";
+@import "./_base";
 /**
  * description: NEC 函数配置
  * author:      hzfangbo@corp.netease.com;
  */
-@import "./_func.mcss";
+@import "./_func";

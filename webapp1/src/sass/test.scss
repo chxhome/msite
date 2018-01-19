@@ -1,0 +1,32 @@
+$nav-color:#f00;
+
+@mixin animation($name,$duration,$pres...){
+	@each $prefix in $pres {
+    #{$prefix}animation: $name $duration ease-out;
+  }
+}
+
+@mixin slideTop-keys($name,$pres...){
+  @each $prefix in $pres {
+    @keyframes #{$name}{
+      0%{
+        #{$prefix}transform:translateY(100%);
+      }
+      100%{
+        #{$prefix}transform:translateY(0);
+      }
+    }
+  }
+	
+}
+
+// @include slideTop-keys(slideTop,-webkit-,-moz-,-o-,-ms-,'');
+// .u-slideTop{
+//   @include animation(slideTop,1s,-webkit-,-moz-,-o-,-ms-,'');
+// }
+.hoverlink {  
+  @extend a:hover;  
+}  
+a:hover {  
+  text-decoration: underline;  
+}  

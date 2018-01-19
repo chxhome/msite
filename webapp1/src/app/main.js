@@ -1,5 +1,4 @@
-﻿import appcss from "../css/app.css";
-import appsass from "../sass/nav.scss";
+﻿import appcss from "../sass/app.scss";
 
 import _exdbase from "../js/extend/base";
 import React from 'react';

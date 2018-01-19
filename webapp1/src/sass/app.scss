@@ -1,9 +1,9 @@
-@import './base/_index.scss';
-@import './unit/_unit.scss';
-@import './unit/_crumbs.scss';
-@import './unit/_btn.scss';
-@import './common/_table.scss';
-@import './common/_form.scss';
+@import './base/_index';
+@import './unit/_unit';
+@import './unit/_crumbs';
+@import './unit/_btn';
+@import './common/_table';
+@import './common/_form';
 
 html, body, .g-module { height: 100%; }
 #app{height:100%;}
@@ -37,7 +37,7 @@ html, body, .g-module { height: 100%; }
 .m-tab { background: #ddd;
     a { display: block; background: #ddd; color: #111; float: left; width: 100px; height: 40px; line-height: 40px; text-align: center; }
     a.z-crt { background: #666; color: #fff; }
-    $clearfix(); }
+    @include clearfix; }
 .m-list {
     li { line-height: 40px; display: flex; flex-direction: row;
         a { flex: 4; display: block;
