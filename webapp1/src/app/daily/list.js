@@ -23,7 +23,11 @@ class DailyList extends React.Component {
       }
     }
 
-    onToDelete(){}
+    onToDelete(item){
+      actions.deleteDaily(item._id,function(){
+        actions.getDailyList();
+      });
+    }
 
     render() {
       let state=this.props.state;console.log(state);
@@ -39,7 +43,10 @@ class DailyList extends React.Component {
                           <td>{dailyEnum.getExpTypeName(item.exptype)}</td>
                           {/* <td>{item.event}</td> */}
                           <td>{dailyEnum.getImportancesName(item.importance)}</td>
-                          <td><a onClick={this.onToEdit.bind(this,item)}>编辑</a><a onClick={this.onToDelete.bind(this)}>删除</a></td>
+                          <td>
+                            <a onClick={this.onToEdit.bind(this,item)} className="cssicon cssicon-edit"><span></span></a>
+                            <a onClick={this.onToDelete.bind(this,item)} className="cssicon cssicon-del"><span></span></a>
+                          </td>
                         </tr>
                       )
                     },this);
@@ -50,7 +57,7 @@ class DailyList extends React.Component {
            <dl className="u-crumbs">
               <dt>消费管理</dt>
               <dd>消费列表</dd>
-              <dd className="right"><Link to="/daily/edit">创建</Link><Link to="/daily/import">导入</Link></dd>
+              <dd className="right"><Link to="/daily/edit" className="u-btn u-btn-sm">创建</Link><Link className="u-btn u-btn-sm" to="/daily/import">导入</Link></dd>
            </dl>
            <div className="m-table">
               <NoData nodata={state.list.length<=0}/>

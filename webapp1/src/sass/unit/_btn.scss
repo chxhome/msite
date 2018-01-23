@@ -4,31 +4,24 @@
  */
 
  @mixin u-btn {
-	display: inline-block;
-	padding:10px 24px;
-	font-size: 12px;
-	line-height: 16px;
-	border-radius:3px;
-	letter-spacing:0.1em;
-	font-size:14px;
-	color:#fff;
-	background-color: #62a8ea;
-	&:hover{
-			background-color:#89bceb;
+	cursor: default;
+	color:$color-white;
+	background-color: $color-btn;
+	&:hover{color:$color-white;
+			background-color:$color-btn-hover;
 	}
-	&:active{
-			background-color:#4e97d9;
+	&:active{color:$color-white;
+			background-color:$color-btn-hover;
 	}
 }
 
 @mixin u-btn-style  {
 	display: inline-block;
-	padding:10px 24px;
+	padding:6px 20px;
 	font-size: 12px;
 	line-height: 16px;
 	border-radius:3px;
 	letter-spacing:0.1em;
-	font-size:14px;
 }
 
 
@@ -38,173 +31,55 @@
  */
 
 .u-btn{
-	display: inline-block;
-	padding:10px 24px;
-	font-size: 12px;
-	line-height: 16px;
-	border-radius: 3px;
-	letter-spacing:0.1em;
-	font-size: 14px;
-	color:#fff;
-	background-color: #5092e1;
-	&:hover{
-		background-color:#89bceb;
-	}
-	&:active{
-		background-color:#4e97d9;
-	}
+	@include u-btn-style;
+	@include u-btn;
 }
 
 .u-btn-disabled{
-	@include u-btn-style;
-	cursor: default;
-	color:#fff;
-	background-color: #bcd8f1;
+	background-color: $color-btn-dis;
 	&:hover{
-		background-color: #bcd8f1;
+		background-color: $color-btn-dis;
 	}
 	&:active{
-		background-color: #bcd8f1;
+		background-color: $color-btn-dis;
 	}
 }
 
-
-.u-btn-xxl{
-	@include u-btn-style;
-	padding:20px 60px;
-}
-.u-btn-xl{
-	@include u-btn;
-	padding:12px 48px;
-
-}
-.u-btn-l{
-	@include u-btn;
-	padding:8px 28px;
+.u-btn-lg{
+	padding: 8px 25px;
 }
 
 .u-btn-sm{
-	@include u-btn;
-	padding:8px 10px;
-}
-.u-btn-ssm{
-	@include u-btn;
-	padding: 4px 16px;
+	padding: 4px 15px;
 }
 
 .u-btn-cancel{
-	@include u-btn;
-  	margin-left: 7px;
-	color:#76838f;
-	background-color: #e4eaec;
+	color:$color-light;
+	background-color: $color-gray;
 	&:hover{
-		background-color: #ccd5db;
+		background-color: $color-grayer;
 	}
 	&:active{
-		background-color: #ccd5db;
+		background-color: $color-grayer;
 	}
 }
-.u-btn-cancel-disabled{
-	@include u-btn-style;
-	cursor: default;
-	color:#fff;
-	background-color: #ccd5db;
-	&:hover{
-		color:#fff;
-		background-color: #ccd5db;
-	}
-	&:active{
-		color:#fff;
-		background-color: #ccd5db;
-	}
-}
+
 .u-btn-delete{
-	@include u-btn;
-	color:#fff;
-	background-color: #f96868;
+	background-color: $color-red;
 	&:hover{
-		background-color: #fa7a7a;
+		background-color: $color-reder;
 	}
 	&:active{
-		background-color: #e9595b;
+		background-color: $color-reder;
 	}
 }
 .u-btn-delete-disabled{
-	@include u-btn-style;
-	cursor: default;
-	color:#fff;
-	background-color: #fab4b4;
+	background-color: $color-red-dis;
 	&:hover{
-		background-color: #fab4b4;
+		background-color: $color-red-dis;
 	}
 	&:active{
-		background-color: #fab4b4;
+		background-color: $color-red-dis;
 	}
 }
 
-.u-btn-close{
-	color:#fff;
-	background-color: #46be8a;
-	&:hover{
-		background-color:#5cd29d;
-	}
-	&:active{
-		background-color: #36ab7a;
-	}
-}
-.u-btn-close-disabled{
-	color:#fff;
-	background-color: #9fe5c5;
-	&:hover{
-		background-color: #9fe5c5;
-	}
-	&:active{
-		background-color: #9fe5c5;
-	}
-}
-.u-btn-save{
-	@include u-btn-style;
-	background-color:#fff;
-	color:#62a8ea;
-	border: 1px solid #a2caee;
-	&:hover{
-		color:#62a8ea;
-		border: 1px solid #62a8ea;
-	}
-	&:active{
-		color:#4e97d9;
-		border: 1px solid #3583ca;
-	}
-}
-.u-btn-save-disabled{
-	@include u-btn-style;
-	cursor: default;
-	color:#bcd8f1;
-	border: 1px solid #ccd5d8;
-	background-color: #fff;
-	&:hover{
-		color:#bcd8f1;
-		border: 1px solid #ccd5d8;
-		background-color: #fff;
-
-	}
-	&:active{
-		color:#bcd8f1;
-		border: 1px solid #ccd5d8;
-		background-color: #fff;
-	}
-}
-.u-btn-cancel-setting{
-	@include u-btn-style;
-	background-color:#fff;
-	color:#76838f;
-	border: 1px solid #dadfe0;
-	&:hover{
-		color:#76838f;
-		border: 1px solid #76838f;
-	}
-	&:active{
-		color:#526069;
-		border: 1px solid #263238;
-	}
-}

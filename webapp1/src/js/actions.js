@@ -7,13 +7,13 @@ var _baseActionCreators = {
         return {
             type : 'SET_TITLE',
             data:title
-        }
+        };
     },
     setLogoImgUrl:function(url){
 		return {
             type : 'SET_LOGO_IMGURL',
             data:url
-        }
+        };
 
     },
     //no-reducer
@@ -22,34 +22,25 @@ var _baseActionCreators = {
         if(data._id){
             url='/daily/updateDaily';
         }
-        //return function(dispatch) {
-             axios.post(url,data)
+        axios.post(url,data)
             .then(function (response) {
-                console.log(response);
-                // dispatch({
-                //     type: '_saveDaily',
-                //     data: response.data
-                // });
-                cb();
+                cb&&cb();
             })
             .catch(function (error) {
               console.log(error);
-            });
-
-        //}
+        });
     },
     //no-reducer
     importDaily:function(data,cb){
         var url="/daily/importDaily";
         //return function(dispatch) {
-             axios.post(url,data)
+        axios.post(url,data)
             .then(function (response) {
-                console.log(response);
-                cb();
+                cb&&cb();
             })
             .catch(function (error) {
               console.log(error);
-            });
+        });
 
         //}
     },
@@ -58,7 +49,6 @@ var _baseActionCreators = {
         return function(dispatch) {
              axios.get('/daily/getDailyList')
             .then(function (response) {
-                console.log(response);
                 dispatch({
                     type: 'GetDailyList',
                     data: response.data
@@ -68,17 +58,27 @@ var _baseActionCreators = {
               console.log(error);
             });
 
-        }
+        };
     },
     getDaily:function(id){
         return function(dispatch) {
              axios.get('/daily/getDaily?id='+id)
             .then(function (response) {
-                console.log(response);
                 dispatch({
                     type: 'GetDaily',
                     data: response.data
                 });
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+
+        };
+    },deleteDaily:function(id,cb){
+        return function(dispatch) {
+             axios.get('/daily/deleteDaily?id='+id)
+            .then(function (response) {
+                cb&&cb();
             })
             .catch(function (error) {
               console.log(error);

@@ -35,9 +35,8 @@ exports.edit = function (request, response, viewdata) {
 *GET
 */
 exports.getDailyList = function (request, response, viewdata) {
-    //console.log(util.inspect(request));
-    console.log(111111);
-    console.log(util.inspect(viewdata));
+    //console.log(111111);
+    //console.log(util.inspect(viewdata));
     if(request.method!="GET"){
         handler.responseErr(400,"method错误",response);
         return;
@@ -77,19 +76,37 @@ let xlsRow2Param=function(row){
 };
 
 exports.getDaily = function (request, response,viewdata) {
-    console.log("controller");
-    console.log(util.inspect(viewdata));
+    //console.log("controller");
+    //console.log(util.inspect(viewdata));
     var id=viewdata.query["id"];
     if(!id){
         handler.responseErr(500, "参数错误", request, response);
         return;
     }
     try {
-        dbdaily.findDaily({_id:+id},function (result) { console.log(result);
+        dbdaily.findDaily({_id:+id},function (result) {
             var re=result||{};
             if(re.data&&re.data.length){
                 re.data=re.data[0];
             }
+            handler.processAjax(request, response, re);
+        });
+
+    } catch (e) {
+        handler.responseErr(500, e.message, request, response);
+    }
+
+};
+
+exports.deleteDaily = function (request, response,viewdata) {
+    var id=viewdata.query["id"];
+    if(!id){
+        handler.responseErr(500, "参数错误", request, response);
+        return;
+    }
+    try {
+        dbdaily.deleteDailyById(+id,function (result) { 
+            var re=result||{};
             handler.processAjax(request, response, re);
         });
 
@@ -158,7 +175,7 @@ exports.updateDaily = function (request, response, viewdata) {
 };
 
 exports.importDaily = function (request, response, viewdata) {
-    console.log("importDaily");
+    //console.log("importDaily");
     var sheets=[],sheet=null,a,b,insetNum=0,data=[],row=[],params=[];
     try{
         var fileDir = config.docDir+"res";
@@ -176,7 +193,7 @@ exports.importDaily = function (request, response, viewdata) {
             sheets = xlsx.parse(filename);  
             if(sheets.length){
                 sheet=sheets[0];
-                console.log("sheet.name:"+sheet.name+"\r\n");  
+                //console.log("sheet.name:"+sheet.name+"\r\n");  
                 data= sheet.data;
                 for(b=0;b<data.length;b++){
                     if(b>0){
@@ -197,7 +214,7 @@ exports.importDaily = function (request, response, viewdata) {
             }
             for(a=0;a<params.length;a++){
                 dbdaily.insertDaily(params[a], function (result) {
-                     console.log(JSON.stringify(param)+"\r\n");  
+                     //console.log(JSON.stringify(param)+"\r\n");  
                      insetNum++;
                      if(insetNum>=params.length){
                         handler.processAjax(request, response, result);

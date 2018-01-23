@@ -1,21 +1,36 @@
-@import './base/_index';
-@import './unit/_unit';
-@import './unit/_crumbs';
-@import './unit/_btn';
-@import './common/_table';
-@import './common/_form';
-
+ @import './base/_index';
+ @import './unit/_unit';
+ @import './unit/_crumbs';
+ @import './unit/_btn';
+ @import './common/_table';
+ @import './common/_form';
+@import './common/_cssicons';
 html, body, .g-module { height: 100%; }
 #app{height:100%;}
 .g-body { display: flex; flex-direction: column; height: 100%;
-    .g-head{height:50px;background:#373d41;color:#fff;}
+    .g-head{height:50px;background:$bgColor-dark;color:$color-white;}
     .g-main{
        display: flex; flex-direction: row;height:100%;
      }
-    .g-nav { background:#333744;color:#fff; width: 120px; border-right: $solid; padding: 10px; overflow: auto; }
+    .g-nav { background:$bgColor-dark;color:$color-white; width: 120px; border-right: $solid;  overflow: auto; }
 
     .g-cont { flex: 1; padding: 10px; overflow: auto; }
 
+}
+.m-logo{
+    .logo{
+        padding: 0;
+        background: #eee;
+        width: 35px;
+        height: 20px;
+        overflow: hidden;
+        border-radius: 50% 50%;
+        border: solid 5px #fff;
+        &:after{
+            content:"CHX";display:inline-block;font-size: 28px;margin:-7px 0 0 -4px;font-family:fantasy;
+        }
+        margin:10px 0 0 10px;
+    }
 }
 
 .m-title{
@@ -26,12 +41,13 @@ html, body, .g-module { height: 100%; }
 .m-nav {
 
 
-    li { height: 30px; line-height: 30px;
+    li { height: 30px; line-height: 30px;padding: 0 10px;
 
-        a { display: block; padding-left: 20px; }
+        a { display: block; padding-left: 20px; color: $color-light;}
 
-        a:hover { background: #009; color: #fff; }
+        a:hover { color: $color-white;  }
     }
+    li:hover{background: $bgColor-darker;}
 }
 
 .m-tab { background: #ddd;

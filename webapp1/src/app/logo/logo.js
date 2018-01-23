@@ -10,9 +10,9 @@ class Logo extends React.Component {
   render() {
     var state=this.props.state;//没有再这里重新赋值，富组件setState，子组件执行render使用this.state不会更新界面，因为这个值没有改变，改变的是this.props.state,源自父组件
     return (
-      <div>
+      <div className="m-logo">
         <Link to="/">
-          <img onClick={this.onChangeImg} alt={state.imgUrl} src={state.imgUrl} width="50" title={state.imgUrlExd}/>
+         <div className="logo"></div>
         </Link>
       </div>
     );

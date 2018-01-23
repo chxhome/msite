@@ -37,7 +37,7 @@ class DailyEdit extends React.Component {
 			formDD:{
 			"time":(new Date()).getTime(),
 			"money":0,
-			"place" : "1111111111111111",
+			"place" : "",
 		    "persons" : "",
 		    "content" : "无",
 		    "event" : "无",
@@ -86,7 +86,7 @@ class DailyEdit extends React.Component {
 		//var state=this.state||{};
 		console.log(this.props);
 		this.state=this.props.state;//console.log(state);
-		if(!this.state.daily._id){
+		if(!this._id){
 			 util.extend(this.state.daily,this._state.formDD,true);
 		}
     var fd=this.state.daily;
@@ -150,7 +150,10 @@ class DailyEdit extends React.Component {
 		// React.getDOMNode()
 		var urlObj=util.parseQueryString(window.location);
 		if(urlObj.id){
+			this._id=urlObj.id;
 			actions.getDaily(urlObj.id);
+		}else{
+			this._id=0;
 		}
 	 		 
 	}

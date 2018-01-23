@@ -24,12 +24,12 @@ input{border-radius:2px;}
 
 /* 全局样式 */
 a{
-  color: #62a8ea;
+  color: $color-link;
   &:hover{
-    color: #89bceb;
+    color: $color-link-hover;
   }
   &:active{
-    color: #4e97d9;
+    color: $color-link-hover;
   }
 }
 ::-webkit-input-placeholder{

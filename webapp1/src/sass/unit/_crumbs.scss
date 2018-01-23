@@ -5,11 +5,11 @@
 	}
 	dd{
 		@include inline-block;color:#666;
-		a{color:$color-link;}
-
 		&.right{
 			position: absolute;top:6px;right:0;
 			&:before{content:"";}
+
+			.u-btn{margin-left:15px;}
 		}
 		&:before{content:">";margin:0 5px;}
 	}

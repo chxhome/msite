@@ -18,7 +18,6 @@ var collname="daily";
 var dbhelper = require('../../dbdriver/mongodb');
 
 exports.findDaily = function (where,cb) {
-    console.log("model findDaily:",where);
     dbhelper.findData(collname, {}, where,cb);
 };
 
@@ -34,5 +33,9 @@ exports.insertDaily = function (data, cb) {
 
 exports.updateDaily = function (id,data,cb) {
     dbhelper.updateData(collname, {_id:id}, data,cb);
+};
+
+exports.deleteDailyById = function (id,cb) {
+    dbhelper.deleteData(collname, {_id:id},{justOne:true},cb);
 };
 

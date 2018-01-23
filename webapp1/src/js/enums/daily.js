@@ -1,5 +1,5 @@
 let _dailyEnums={
-	exptypes:[{"text":"未知","value":0},{"text":"购物","value":1},{"text":"教育","value":2},{"text":"饮食","value":3},{"text":"玩乐","value":4},{"text":"家庭","value":5}],
+	exptypes:[{"text":"未知","value":0},{"text":"衣食","value":1},{"text":"住行","value":2},{"text":"教育","value":3},{"text":"玩乐","value":4},{"text":"医药","value":5},{"text":"养生","value":6},{"text":"社交","value":7},{"text":"其他","value":8}],
 	getExpTypeName:function(value){
 		for(var a=0;a<this.exptypes.length;a++){
 			if(this.exptypes[a].value==value){

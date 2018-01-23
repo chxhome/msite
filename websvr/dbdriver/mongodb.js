@@ -25,6 +25,7 @@ exports.findData = function (collectioname, set, where, sortby, callback) {
         var collection = db.collection(collectioname);
         console.log("mongodb driver find(",where,",",set,")");
         collection.find(where, set).sort(sortby).toArray(function (err, result) {
+            //result:[{},{},...]
             db.close();
             //如果存在错误
             if (err) {
@@ -32,7 +33,6 @@ exports.findData = function (collectioname, set, where, sortby, callback) {
                 callback({ code: 500, msg: err.toString() });
                 return;
             }
-            console.log("mongodb driver result:",result);
             //调用传入的回调方法，将操作结果返回
             callback({ code: 200, data: result});
         });
@@ -68,11 +68,11 @@ exports.insertData = function (collectioname, data, callback) {
                         console.log(err);
                         return cb(err);
                     }
-                    //console.log('result111' + JSON.stringify(result));
                     data[id] = result.value[inckey];
 
                     delete data._autoid;
                     collection.insert(data, function (err, result) {
+                        //result:{insertedCount:1,insertedIds:[11],ops:[{}],result:{ok:1,n:1}}
                         db.close();
                         if (err) {
                             console.log('Error:' + err);
@@ -126,6 +126,7 @@ exports.updateData = function (collectioname, where, updatedata, callback) {
             }
         }
         collection.update(where, {$set: updatedata}, function (err, result) {
+            //result:{n:1,nModified:1,ok:1}
             db.close();
             if (err) {
                 console.log('Error:' + err);
@@ -134,6 +135,33 @@ exports.updateData = function (collectioname, where, updatedata, callback) {
             }
             //调用传入的回调方法，将操作结果返回
             callback({ code: 200, data: result });
+        });
+
+
+    });
+};
+
+exports.deleteData = function (collectioname, where, deloptions, callback) {
+    //使用客户端连接数据，并指定完成时的回调方法
+    MongoClient.connect(config.mongodbConnStr, function (err, db) {
+        if (err) {
+            console.log('Error:' + err);
+            callback({ code: 500, msg: err.toString() });
+            return;
+        }
+        //获得指定的集合 
+        var collection = db.collection(collectioname);
+        console.log('remove:' + JSON.stringify(where));
+        collection.remove(where, deloptions.justOne, function (err, result) {
+            //result.result:{n:1,ok:1}
+            db.close();
+            if (err) {
+                console.log('Error:' + err);
+                callback({ code: 500, msg: err.toString() });
+                return;
+            }
+            //调用传入的回调方法，将操作结果返回
+            callback({ code: 200, data: result.result });
         });
 
 

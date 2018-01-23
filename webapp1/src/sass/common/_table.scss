@@ -15,67 +15,8 @@
 .m-table tbody tr:hover{background-color:$bgColor-light;}
 .m-table td{
     @include ellipsis;
-    .u-icon-edit{
-        margin-right: 20px;
-    }
-    .u-icon-admin,.u-icon-superadmin,.u-icon-kefu,.u-icon-outerkefu,.u-icon-empty{
-        margin-right: 4px;
-    }
-    .u-icon-online,.u-icon-offline,.u-icon-kefupending{
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        $border-radius:50%;
-        margin-right: 8px;
-    }
-    .u-icon-kefu{
-        background:transparent !important;
-    }
-    .u-icon-disabled{
-        transform:translate(-1px,2px);
-    }
-    .u-icon-okmini{
-        transform:translate(-2px,4px);
-    }
-    .u-icon-empty{
-        display: inline-block;
-        width: 14px;
-        height: 14px;
-    }
-    a{
-
-    }
-    .m-tips{
-        display: inline-block;
-    }
-    .time{
-        display: inline-block;
-        min-width: 48px;
-    }
-    .u-icon-usergroup{
-        transform: translateY(4px);
-        margin-right: 4px;
-    }
-    .delete{
-        cursor: pointer;
-    }
+    .cssicon{margin-right:8px;}
 }
 .m-table thead td{
     font-weight:bold;
-    .sort{
-        display: inline-block;
-        height: 15px;
-        padding: 2px 0 0 4px;
-        vertical-align: middle;
-        width: 8px;
-    }
-    .u-icon-triangleup,.u-icon-triangledown{
-        display: block;
-    }
-    .u-icon-triangleup{
-        margin-bottom: 2px;
-    }
-    .z-triangleup-active,.z-triangledown-active{
-        background-position-x: -60px !important;
-    }
 }
