@@ -1,0 +1,60 @@
+<html>
+   <head>
+
+   </head>
+   <body>
+<a id="save">save</a>
+<textarea id="content"></textarea>
+    <script>
+// let arr1={
+//   a:1,
+//   b:2
+// };
+// //let arr2=arr1;
+// let arr2={...arr1};
+// console.log(arr2);
+// arr2.b='shengHongYu';
+// console.log(arr2);
+// console.log(arr1);//999
+// console.log("aasdsds".startsWith("aa"));
+// console.log(0b0101);
+
+
+// var name =Symbol();
+// //a.name = 11;
+// var a = {
+//   [name]:111
+// };
+//console.log(a[name]); 
+    </script>
+    <script type="text/javascript">
+      /* var Base64 = {}; */
+              
+      window.onload = function() {
+          var save = document.getElementById("save");
+          // IE
+          if(/msie/i.test(navigator.userAgent)) {
+              save.onclick = function() {
+                  var path = prompt("输入保存路径和文件名", "C:\\test.txt");
+                  var content = document.getElementById("content").value;
+                  content = content.replace(/\n/g, "\r\n");
+                  var fso = new ActiveXObject("Scripting.FileSystemObject");
+                  var s = fso.CreateTextFile(path, true);
+                  s.WriteLine(content);
+                  s.Close();
+              };
+          }
+          // Firefox/Chrome/Safari/Opera
+          else {
+              // 鼠标经过 a 的时候就开始 base64 编码
+              save.onclick = function() {
+                  var content = document.getElementById("content").value;
+                  this.setAttribute("href",
+                      "data:application/octet-stream;text,"
+                      + (content));
+              };
+          }
+      };
+      </script>
+   </body>
+</html>
