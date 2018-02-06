@@ -1,13 +1,19 @@
-let target = function (s) {
-  return 'I am JSPang'+s;
+// const pipeline = (...funcs) =>
+//   val => funcs.reduce((a, b) => b(a), val);
+
+var pipeline=function(...funcs){
+  return function(val){
+      return funcs.reduce(function(a,b){
+        return b(a);
+      },val);
+  };
+
 };
-var handler = {
-  apply(target, ctx, args) {
-      console.log('do apply');
-      return Reflect.apply(...arguments);
-  }
-}
 
-var pro = new Proxy(target, handler);
+const plus1 = a => a + 1;
+const mult2 = a => a * 2;
+const addThenMult = pipeline(plus1, mult2);
 
-console.log(pro('ddddddddddd'));
+let a=addThenMult(5);
+console.log(a);
+// 12

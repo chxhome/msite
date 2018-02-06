@@ -29,32 +29,19 @@
     </script>
     <script type="text/javascript">
       /* var Base64 = {}; */
-              
-      window.onload = function() {
-          var save = document.getElementById("save");
-          // IE
-          if(/msie/i.test(navigator.userAgent)) {
-              save.onclick = function() {
-                  var path = prompt("输入保存路径和文件名", "C:\\test.txt");
-                  var content = document.getElementById("content").value;
-                  content = content.replace(/\n/g, "\r\n");
-                  var fso = new ActiveXObject("Scripting.FileSystemObject");
-                  var s = fso.CreateTextFile(path, true);
-                  s.WriteLine(content);
-                  s.Close();
-              };
-          }
-          // Firefox/Chrome/Safari/Opera
-          else {
-              // 鼠标经过 a 的时候就开始 base64 编码
-              save.onclick = function() {
-                  var content = document.getElementById("content").value;
-                  this.setAttribute("href",
-                      "data:application/octet-stream;text,"
-                      + (content));
-              };
-          }
-      };
+      class Point {
+}
+
+class ColorPoint extends Point {
+}
+
+      var p1 = new Point(2, 3);
+var p2 = new ColorPoint(2, 3, 'red');
+
+p2.__proto__ === p1.__proto__ // false
+p2.__proto__.__proto__ === p1.__proto__ // true
+
+console.log(p2);
       </script>
    </body>
 </html>

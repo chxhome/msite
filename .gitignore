@@ -5,4 +5,6 @@ webapp1/node_modules
 webapp1/build
 config-env.js
 npm-debug.log
-
+webvue
+vuecliTest
+vusionapp
