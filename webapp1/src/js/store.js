@@ -28,12 +28,15 @@ var _initstate = {
     var logger = function (store) {
         return function (next) {
             return function (action) {
-                console.group(action.type);
-                console.info('dispatching', action);
-                let result = next(action);
-                console.log('new state:', store.getState());
-                console.groupEnd(action.type);
-                return result;
+                if(action){
+                    console.group(action.type);
+                    console.info('dispatching', action);
+                    let result = next(action);
+                    console.log('new state:', store.getState());
+                    console.groupEnd(action.type);
+                    return result;
+                }
+                
             }
         }
     }

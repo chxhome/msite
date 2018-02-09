@@ -12,7 +12,7 @@ class Text extends React.Component {
     onInputChange(event){
       this._beginChg=true;
       this.setState({
-         value:event.target.value//.toUpperCase()
+         value:event.target.value
       });
       if(this.props["on-change"]){
         this.props["on-change"](event.target.value);

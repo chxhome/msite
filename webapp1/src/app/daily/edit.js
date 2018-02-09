@@ -35,6 +35,7 @@ class DailyEdit extends React.Component {
 		//this.state=props.state;
 		this._state={
 			formDD:{
+				"_id":0,
 			"time":(new Date()).getTime(),
 			"money":0,
 			"place" : "",
@@ -49,9 +50,10 @@ class DailyEdit extends React.Component {
     		importances:dailyEnum.importances,//[{"text":"可避免","value":0},{"text":"一般","value":1},{"text":"重要","value":2},{"text":"必须","value":3},{"text":"非常重要","value":4}]
 				accounts:[{"text":"2017","value":1},{"text":"2018","value":2}]
 			}};
-
+			this._id=0;console.log("constructor");
   }
   componentWillMount () {
+		console.log("componentWillMount");
     // add event listeners (Flux Store, WebSocket, document, etc.)
   }
 
@@ -84,7 +86,7 @@ class DailyEdit extends React.Component {
 
   render() {
 		//var state=this.state||{};
-		console.log(this.props);
+		console.log("this._id"+this._id);
 		this.state=this.props.state;//console.log(state);
 		if(!this._id){
 			 util.extend(this.state.daily,this._state.formDD,true);
@@ -148,6 +150,7 @@ class DailyEdit extends React.Component {
 	
 	componentDidMount () {
 		// React.getDOMNode()
+		console.log("componentDidMount");
 		var urlObj=util.parseQueryString(window.location);
 		if(urlObj.id){
 			this._id=urlObj.id;

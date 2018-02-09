@@ -17,16 +17,15 @@ const spritesmith = require('gulp.spritesmith');//根据某目录下的多张图
 const replace = require('gulp-replace');
 
 
-gulp.task('del-react-js-hash', function() {
-	
-});
 
 gulp.task('build', [], () => {
     const config = require('./webpack.config.js');
     const compiler = webpack(config,function(err,stats){
         gulp.src('./build/index.html')
 		.pipe(replace(/react\.bundle\.js\?\w+/g, 'react.bundle.js'))
-		.pipe(gulp.dest('./build'));
+        .pipe(gulp.dest('./build'));
+        
+        gulp.src('./build/index.html').pipe(gulp.dest('../websvr/view/daily'));
     });
 });
 

@@ -43,12 +43,12 @@ class _Date extends React.Component {
     getValue(){
       return this.state.value;
     }
-    render() {//console.log(this.props.value);console.log("111111111111111111111111111111");
+    render() {
        // this.state.dvalue=this.props.value;
        if(!this._beginChg){
         var obj=this._getDateValue(this.props.value);
         this.state.dvalue=obj.value;
-        this.state.value=obj;console.log(this.state);console.log("222222222222222");console.log(obj);
+        this.state.value=obj;
        }
         return (
            <div className="u-input">
