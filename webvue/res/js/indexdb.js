@@ -78,10 +78,10 @@
       var watingDBQ=[];
       var watingDBFNS={
         openStore:function(storeName,type,data,key){
-          console.log("01--opendb-"+_version+" to openStore:"+storeName);
-         dbRequest= IDB.open(_dbName);
+          console.log("01--opendb-"+_version+" to openStore:"+storeName);console.log(IDB);
+         dbRequest= IDB.open(_dbName);console.log(dbRequest);
           dbRequest.onsuccess=function(event){
-               var db=event.target.result;
+               var db=event.target.result;console.log(db);
                _version=db.version;
                console.log("02--openStore:"+storeName+ " begin in onsuccess");
                try{
@@ -109,17 +109,19 @@
                   }else{
                     _dbevts._run("oncomplete");
                   }
+                  db.close();
                }catch(e){
-                 console.log(e);
-                 //查询或添加数据时，若存储对象不存在，则新建一个
-                 if(type=="find"||(data&&type=="add")){
+                 console.error(e);
+                 db.close();
+                 //添加数据时，若存储对象不存在，则新建一个
+                 if((data&&type=="add")){
                     console.log("05--openStore:"+storeName+" fail then to create inline");
                     watingDBFNS.createStore.call(_this,storeName,type,data,key||"id");
                  }else{
                   _dbevts._run("oncomplete");
                  }
                }
-               db.close();
+              
                
           };
         },
@@ -128,7 +130,8 @@
             console.log("06--opendb-"+openv+" to createStore:"+storeName);
             dbRequest= IDB.open(_dbName,openv);
             dbRequest.onerror=function(event){
-              console.log(event);
+              console.error(event);
+              //db.close();
             };
             dbRequest.onsuccess=function(event){
               var db=event.target.result;
@@ -154,7 +157,7 @@
                 objectStore.createIndex(_k.toString(),_k.toString());
               }
               //只有添加数据时，创建存储对象后马上插入
-              if(type=="add"){
+              if(type=="find"||(data&&type=="add")){
                 objectStore.add(data);
                 console.log("08--openStore:"+storeName+" and add item");
                 _dbevts._run("oncomplete",{name:"add",store:storeName,data:data});
@@ -168,6 +171,9 @@
       };
       this.openStore=function(storeName,type,data,key){
         watingDBFNS.openStore.apply(this,[storeName,type,data,key]);
+      };
+      this.createStore=function(storeName,data,key){
+        watingDBFNS.createStore.apply(this,[storeName,0,data,key]);
       };
   }
   var IDBHelper=function(dbName){
@@ -197,12 +203,13 @@
           isRequesting=false;
           if(_Watings.length){
             var evt=_Watings.pop();
-            _this[evt.name].apply(_this,evt.args);
+            _this[evt.name].apply(_this,evt.args);//执行队列里的操作
+            if(event&&event.name){
+              _dbhevts._run("on"+event.name,event.data);//执行监听事件回调函数，通知用户处理了某个操作并返回操作结果，比如onfind onadd
+            }
           }
           console.log(event);
-          if(event&&event.name){
-            _dbhevts._run("on"+event.name,event.data);
-          }
+         
       });
       this.add=function(storeName,data){
         if(isRequesting){
@@ -211,6 +218,7 @@
         }
         isRequesting=true;
         logDB.openStore(storeName,"add",data);
+        _dbhevts._run("onadd",data);//执行监听事件回调函数，通知用户处理了某个操作
       };
 
       this.find=function(storeName,where){
@@ -220,6 +228,7 @@
           }
           isRequesting=true;
           logDB.openStore(storeName,"find",where);
+          _dbhevts._run("onfind",data);//执行监听事件回调函数，通知用户处理了某个操作
       };
 
       this.delete=function(storeName,data){
@@ -229,6 +238,11 @@
           }
           isRequesting=true;
           logDB.openStore(storeName,"delete",data);
+          _dbhevts._run("ondelete",data);//执行监听事件回调函数，通知用户处理了某个操作
+      };
+
+      this.createStore=function(storeName,data,key){
+        logDB.createStore(storeName,data,key);
       };
   };
 
@@ -243,6 +257,7 @@
       // }];
 
       var dbhelper=new IDBHelper(dbName);
+      
       dbhelper.on("onadd",function(data){
         console.log(data);
       });
@@ -254,8 +269,8 @@
       });
       this.addLog=function(data){
         dbhelper.add("testlog",data);
-        dbhelper.add("testlog1",data);
-        this.findLog();
+        //dbhelper.add("testlog1",data);
+        //this.findLog();
       };
 
       this.findLog=function(data){
@@ -266,6 +281,10 @@
       this.deleteLog=function(data){
         dbhelper.delete("testlog",data);
       };
+      this.createStore=function(storeName,data,key){
+        dbhelper.createStore(storeName,data,key);
+      };
+     
 
   };
   G.ilog= new LOG();
